@@ -699,6 +699,10 @@ a {
     padding-top: 100px;
     background-color: #E7ECF1;
     padding-bottom: 195px;
+    position: relative;
+}
+.rewievs .slick-list {
+    overflow: visible;
 }
 .review-block {
     background-color: #fff;
@@ -736,6 +740,28 @@ a {
     letter-spacing: 2px;
     color: #333333;
     padding-bottom: 9px;
+}
+.rewiev-slayder {
+    display: flex!important;
+    column-gap: 32px;
+    position: relative;
+}
+.review-block {
+    display: flex!important;
+    margin-right: 32px;
+    position: relative;
+}
+.slayder-arrow.rewiev-prev {
+    position: absolute;
+    bottom: -64px;
+    left: 0;
+    z-index: 100;
+}
+.slayder-arrow.rewiev-next {
+    position: absolute;
+    bottom: -64px;
+    right: 0;
+    z-index: 100;
 }
 .rewiev-data {
     font-family: 'Gosha Sans';
@@ -854,8 +880,24 @@ a {
     padding-bottom: 64px;
 }
 .team-slayder {
-    display: flex;
+    display: flex!important;
     column-gap: 32px;
+    position: relative;
+}
+.team-slayder-blocks {
+    padding-right: 32px;
+}
+.slayder-arrow.team-prev {
+    position: absolute;
+    bottom: 413px;
+    left: -50px;
+    cursor: pointer;
+}
+.slayder-arrow.team-next {
+    position: absolute;
+    bottom: 413px;
+    right: -18px;
+    cursor: pointer;
 }
 .slayder {
     display: flex;
