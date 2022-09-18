@@ -118,7 +118,10 @@ a {
     text-transform: uppercase;
     color: #333333;
 }
-.slayder-wrapper {
+.slayder {
+    position: relative;
+}
+.slayder-wrapper-content {
     display: flex!important;
     justify-content: space-between;
     height: 454px;
@@ -171,15 +174,15 @@ a {
 }
 .slayder-arrow {
     position: absolute;
+    bottom: 0;
     z-index: 10;
     cursor: pointer;
-    bottom: 47px;
-}
-.slayder-arrow.next {
-    left: 70px;
 }
 .slayder-arrow.prev {
     left: 10px;
+}
+.slayder-arrow.next {
+    left: 70px;
 }
 .slayder-info {
     padding-top: 46px;
@@ -196,8 +199,8 @@ a {
 }
 .orange-rectangle {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 0px;
+    left: 0px;
     z-index: 10;
     background-color: #FF7602;
     width: 333px;
@@ -205,8 +208,8 @@ a {
 }
 .gray-rectangle {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 0px;
+    right: 0px;
     z-index: 10;
     background-color: #E7ECF1;
     width: 247px;
