@@ -118,8 +118,8 @@ a {
     text-transform: uppercase;
     color: #333333;
 }
-.slayder {
-    display: flex;
+.slayder-wrapper {
+    display: flex!important;
     justify-content: space-between;
     height: 454px;
     align-items: center;
@@ -169,11 +169,17 @@ a {
     border: none;
     display: block;
 }
-.slayder-arrows {
-    margin-bottom: 48px;
-}
 .slayder-arrow {
-    margin-right: 46px;
+    position: absolute;
+    z-index: 10;
+    cursor: pointer;
+    bottom: 47px;
+}
+.slayder-arrow.next {
+    left: 70px;
+}
+.slayder-arrow.prev {
+    left: 10px;
 }
 .slayder-info {
     padding-top: 46px;
@@ -181,6 +187,7 @@ a {
 .slayder-image {
     position: relative;
     max-width: 560px;
+    padding: 15px;
 }
 .slayder-img {
     display: block;
@@ -189,8 +196,8 @@ a {
 }
 .orange-rectangle {
     position: absolute;
-    bottom: -16px;
-    left: -15px;
+    bottom: 0;
+    left: 0;
     z-index: 10;
     background-color: #FF7602;
     width: 333px;
@@ -198,8 +205,8 @@ a {
 }
 .gray-rectangle {
     position: absolute;
-    top: -14px;
-    right: -15px;
+    top: 0;
+    right: 0;
     z-index: 10;
     background-color: #E7ECF1;
     width: 247px;
@@ -846,6 +853,9 @@ a {
 .team-slayder {
     display: flex;
     column-gap: 32px;
+}
+.slayder {
+    display: flex;
 }
 .team-slayder-img {
     display: block;
