@@ -1,9 +1,0 @@
-@font-face {
-    font-family: 'Gosha Sans';
-    src: local('Gosha Sans Light'), local('Gosha-Sans-Light'),
-        url('GoshaSans-Light.woff2') format('woff2'),
-        url('GoshaSans-Light.woff') format('woff'),
-        url('GoshaSans-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-  }
