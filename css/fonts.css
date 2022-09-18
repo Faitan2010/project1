@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'Gosha Sans';
+    src: local('Gosha Sans Light'), local('Gosha-Sans-Light'),
+        url('/fonts/GoshaSans-Light.woff2') format('woff2'),
+        url('/fonts/GoshaSans-Light.woff') format('woff'),
+        url('/fonts/GoshaSans-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-swap: swap;
+}
+@font-face {
+    font-family: 'Gosha Sans';
+    src: local('Gosha Sans Bold'), local('Gosha-Sans-Bold'),
+        url('/fonts/GoshaSans-Bold.woff2') format('woff2'),
+        url('/fonts/GoshaSans-Bold.woff') format('woff'),
+        url('/fonts/GoshaSans-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gosha Sans';
+    src: local('Gosha Sans Medium'), local('Gosha-Sans-Medium'),
+        url('/fonts/GoshaSans-Medium.woff2') format('woff2'),
+        url('/fonts/GoshaSans-Medium.woff') format('woff'),
+        url('/fonts/GoshaSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gosha Sans';
+    src: local('Gosha Sans Regular'), local('Gosha-Sans-Regular'),
+        url('/fonts/GoshaSans-Regular.woff2') format('woff2'),
+        url('/fonts/GoshaSans-Regular.woff') format('woff'),
+        url('/fonts/GoshaSans-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Gosha Sans';
+    src: local('Gosha Sans Ultra light'), local('Gosha-Sans-Ultra-light'),
+        url('/fonts/GoshaSans-Ultralight.woff2') format('woff2'),
+        url('/fonts/GoshaSans-Ultralight.woff') format('woff'),
+        url('/fonts/GoshaSans-Ultralight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Bebas Neue';
+    src: url('/fonts/bebas-neue-bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
