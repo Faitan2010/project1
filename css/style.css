@@ -38,6 +38,14 @@ a {
     display: block;
     color: #00939A;
     padding-top: 7px;
+    font-size: 14px;
+}
+.header-menu {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    width: 100%;
+    background-color: white;
 }
 .logo-text {
     font-family: 'Gosha Sans';
@@ -107,7 +115,6 @@ a {
     display: flex;
     justify-content: space-between;
     padding-bottom: 12px;
-    margin-bottom: 32px;
 }
 .subheader-menu-link {
     font-family: 'Gosha Sans';
@@ -120,6 +127,7 @@ a {
 }
 .slayder {
     position: relative;
+    margin-top: 200px;
 }
 .slayder-wrapper-content {
     display: flex!important;
