@@ -40,12 +40,17 @@ a {
     padding-top: 7px;
     font-size: 14px;
 }
+.header-animate {
+    transform: translateY(-93px);
+
+}
 .header-menu {
     position: fixed;
     z-index: 999;
     top: 0;
     width: 100%;
     background-color: white;
+    transition: all ease-in .3s;
 }
 .logo-text {
     font-family: 'Gosha Sans';
