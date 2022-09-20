@@ -381,6 +381,7 @@ a {
     flex: 0 0 19%;
 }
 .table-column-counter-info-tonn {
+    user-select: none;
     font-family: 'Gosha Sans';
     font-style: normal;
     font-weight: 300;
