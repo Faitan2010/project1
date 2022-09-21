@@ -1,6 +1,6 @@
-// 1 - sliders
-// 2 - animate header
-// 3 - loader
+// 1 - sliders (+)
+// 2 - animate header (+)
+// 3 - loader (+)
 // 4 - submit forms
 // 5 - modal window
 // 6 - counters
@@ -72,41 +72,41 @@ $(document).ready(function () {
     const counterWrappers = [...document.querySelectorAll('.table-column-counter-info')];
 
     counterWrappers.forEach((item) => {
-        counter(item);
+        new Counter(item);
     });
 });
 
-function counter(counter) {
+function Counter(counter) {
     if (!counter) {
         return;
     }
 
     this.plus = counter.querySelector('.span-plus');
     this.minus = counter.querySelector('.span-minus');
-    const counterInput = counter.querySelector('.table-column-counter-info-text');
+    this.counterInput = counter.querySelector('.table-column-counter-info-text');
 
     this.increment = (e) => {
         e.preventDefault();
 
-        counterInput.value = Number(counterInput.value) + 1;
+        this.counterInput.value = Number(this.counterInput.value) + 1;
     }
 
     this.decrement = (e) => {
         e.preventDefault();
 
-        if (counterInput.value <= 0) {
+        if (this.counterInput.value <= 0) {
             return
         }
-        counterInput.value = Number(counterInput.value) - 1;
+        this.counterInput.value = Number(this.counterInput.value) - 1;
     }
 
     this.checkInputValue = (e) => {
-        if (isNaN(counterInput.value)) {
-            counterInput.value = 0;
+        if (isNaN(this.counterInput.value)) {
+            this.counterInput.value = 0;
         }
     }
 
     this.plus.addEventListener('click', this.increment);
     this.minus.addEventListener('click', this.decrement);
-    counterInput.addEventListener('input', this.checkInputValue);
+    this.counterInput.addEventListener('input', this.checkInputValue);
 }
