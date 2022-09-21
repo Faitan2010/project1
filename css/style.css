@@ -424,6 +424,7 @@ a {
 .table-column-counter-info-text {
     border: none;
     text-align: center;
+    user-select: none;
 }
 .price-order {
     display: flex;
