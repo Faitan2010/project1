@@ -21,9 +21,18 @@ $(document).ready(function () {
 </svg>`,
         nextArrow: ` <svg class="slayder-arrow next" width="19" height="32" viewBox="0 0 19 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 2L16 16L2 30" stroke="#333333" stroke-width="3" />
-</svg>`
+</svg>`,
+    responsive: [
+        {
+          breakpoint: 1025,
+          settings: {
+            infinite: true,
+            dots: true,
+          }
+        }
+    ]
     });
-
+    
     $('.team-slayder').slick({
         infinite: true,
         slidesToShow: 3,
@@ -33,7 +42,25 @@ $(document).ready(function () {
 </svg>`,
         nextArrow: ` <svg class="slayder-arrow team-next" width="19" height="32" viewBox="0 0 19 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 2L16 16L2 30" stroke="#FFFFFF" stroke-width="3" />
-</svg>`
+</svg>`,
+    responsive: [
+        {
+        breakpoint: 1025,
+        settings: {
+            infinite: true,
+            dots: true,
+            slidesToShow: 2,
+        }
+        },
+        {
+        breakpoint: 590,
+        settings: {
+            infinite: true,
+            dots: true,
+            slidesToShow: 1,
+        }
+        }
+    ]
     });
 
     $('.rewiev-slayder').slick({
@@ -46,7 +73,16 @@ $(document).ready(function () {
         infinite: false,
         speed: 300,
         slidesToShow: 2,
-        variableWidth: true
+        variableWidth: true,
+        responsive: [
+            {
+            breakpoint: 1025,
+            settings: {
+                infinite: true,
+                dots: true,
+            }
+            }
+        ]
     });
     const headerMenu = document.querySelector('.header-menu');
     let prevScrollValue = window.scrollY;
