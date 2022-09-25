@@ -1646,9 +1646,9 @@ textarea:focus, input:focus {
     .choice-header {
         padding-bottom: 33px;
     }
-    .team-slayder {
+    /* .team-slayder {
         overflow-y: visible;
-    }
+    } */
     .team-header {
         padding-top: 85px;
         padding-bottom: 48px;
