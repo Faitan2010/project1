@@ -33,6 +33,9 @@ body {
         transform: rotate(360deg);
     }
 }
+.menu-icon {
+    display: none;
+}
 .mask-none {
     opacity: 0;
     z-index: -1;
@@ -1747,6 +1750,45 @@ textarea:focus, input:focus {
     .table-column-money {
         flex: 0 0 50%;
     }
+    .menu-icon {
+        display: block;
+        width: 30px;
+        height: 16px;
+        position: relative;
+        left: 0;
+        top: 16px;
+        transform: translateY(50%);
+    }
+    .menu-icon-line {
+        width: 100%;
+        height: 2px;
+        background-color: blue;
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .menu-icon:before {
+        width: 100%;
+        height: 2px;
+        background-color: blue;
+        position: absolute;
+        left: 20px;
+        top: 0;
+        content: '';
+    }
+    .menu-icon:after {
+        width: 100%;
+        height: 2px;
+        background-color: blue;
+        position: absolute;
+        left: 20px;
+        bottom: 0;
+        content: '';
+    }
+    .wrapper {
+        justify-content: space-around;
+    }
 }
 @media (max-width: 767px) {
     .table-column-block {
@@ -1873,4 +1915,24 @@ textarea:focus, input:focus {
     .sum-counter {
         padding-left: 15px;
     }
+}
+.header.active .menu-icon-line {
+    display: none;
+}
+.header.active .menu-icon::before {
+    transform-origin: center;
+    transform: translate(-50%, -50%) rotate(45deg);
+    left: 50%;
+    top: 50%;
+    
+}
+.header.active .menu-icon::after {
+    transform-origin: center;
+    transform: translate(-50%, 50%) rotate(-45deg);
+    left: 50%;
+    top: 50%;
+}
+
+.header.active .menu-items {
+    transform: translateX(0);
 }
