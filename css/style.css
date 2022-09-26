@@ -4,7 +4,8 @@
     padding: 0;
     color: #333333
 }
-body {
+body,
+html {
     position: relative;
     overflow-x: hidden;
 }
@@ -1425,6 +1426,12 @@ textarea:focus, input:focus {
     }
 }
 @media (max-width: 1024px) {
+    .working-time {
+        display: none;
+    }
+    .marketing-info {
+        display: none;       
+    }
     .subheader-menu {
         display: none;
     }
@@ -1646,9 +1653,9 @@ textarea:focus, input:focus {
     .choice-header {
         padding-bottom: 33px;
     }
-    /* .team-slayder {
+    .team-slayder {
         overflow-y: visible;
-    } */
+    }
     .team-header {
         padding-top: 85px;
         padding-bottom: 48px;
@@ -1756,15 +1763,14 @@ textarea:focus, input:focus {
         height: 16px;
         position: relative;
         left: 0;
-        top: 16px;
-        transform: translateY(50%);
+        top: 0;
     }
     .menu-icon-line {
         width: 100%;
         height: 2px;
         background-color: blue;
         position: absolute;
-        left: 20px;
+        left: 0px;
         top: 50%;
         transform: translateY(-50%);
     }
@@ -1773,7 +1779,7 @@ textarea:focus, input:focus {
         height: 2px;
         background-color: blue;
         position: absolute;
-        left: 20px;
+        left: 0px;
         top: 0;
         content: '';
     }
@@ -1782,12 +1788,9 @@ textarea:focus, input:focus {
         height: 2px;
         background-color: blue;
         position: absolute;
-        left: 20px;
+        left: 0px;
         bottom: 0;
         content: '';
-    }
-    .wrapper {
-        justify-content: space-around;
     }
 }
 @media (max-width: 767px) {

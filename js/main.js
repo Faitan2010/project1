@@ -84,10 +84,12 @@ $(document).ready(function () {
             }
         ]
     });
-    const headerMenu = document.querySelector('.header-menu');
-    let prevScrollValue = window.scrollY;
-
-    window.addEventListener('scroll', animateHeader);
+        const headerMenu = document.querySelector('.header-menu');
+        let prevScrollValue = window.scrollY;
+    if (window.innerWidth >= 1024) {
+        console.log (window.innerWidth)
+        window.addEventListener('scroll', animateHeader);
+    }
 
     function animateHeader() {
         if (prevScrollValue < window.scrollY) {
