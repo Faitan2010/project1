@@ -85,27 +85,29 @@ $(document).ready(function () {
         ]
     });
         const headerMenu = document.querySelector('.header-menu');
-        let prevScrollValue = window.scrollY;
+        
     if (window.innerWidth >= 1024) {
+        let prevScrollValue = window.scrollY;
         console.log (window.innerWidth)
         window.addEventListener('scroll', animateHeader);
-    }
-
-    function animateHeader() {
-        if (prevScrollValue < window.scrollY) {
-
-            if (!headerMenu.classList.contains('header-animate')) {
-                headerMenu.classList.add('header-animate');
+        function animateHeader() {
+            if (prevScrollValue < window.scrollY) {
+    
+                if (!headerMenu.classList.contains('header-animate')) {
+                    headerMenu.classList.add('header-animate');
+                }
+            } else {
+    
+                if (headerMenu.classList.contains('header-animate')) {
+                    headerMenu.classList.remove('header-animate');
+                }
             }
-        } else {
-
-            if (headerMenu.classList.contains('header-animate')) {
-                headerMenu.classList.remove('header-animate');
-            }
+    
+            prevScrollValue = window.scrollY;
         }
-
-        prevScrollValue = window.scrollY;
     }
+
+    
 
     const counterWrappers = [...document.querySelectorAll('.table-column-counter-info')];
 
