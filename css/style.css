@@ -1470,7 +1470,7 @@ textarea:focus, input:focus {
     .third-block .sales-grid-header {
         padding-right: 0;
     }
-    .sales-grid-info {
+    .second-block .sales-grid-info {
         padding-right: 0;
         font-size: 14px;
     }
