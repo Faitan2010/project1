@@ -122,6 +122,9 @@ a {
     line-height: 17px;
     padding-left: 34px;
 }
+.working-time-text-mobile {
+    display: none;
+}
 .working-time::before {
     width: 20px;
     height: 20px;
@@ -1542,6 +1545,7 @@ textarea:focus, input:focus {
         left: 0;
         justify-content: space-between;
         display: flex;
+        transform: translateX(-120vw);
     }
     .subheader-menu {
         flex-direction: column;
@@ -1570,7 +1574,41 @@ textarea:focus, input:focus {
         flex-direction: column;
         width: 100%;
         height: calc(100vh - 80px);
-        z-index: 9887222
+        z-index: 9887222;
+        margin: 0 auto;
+        max-width: 289px;
+    }
+    .marketing-text-mobile {
+        color: white;
+        padding-top: 35px;
+        text-align: center;
+        margin: 0 auto;
+        font-family: 'Gosha Sans';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 150%;
+    }
+    .working-time-text-mobile {
+        display: block;
+        padding-bottom: 4px;
+        font-family: 'Gosha Sans';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 19px;
+        color: #FFFFFF;
+    }
+    .working-time-mobile::before {
+        width: 20px;
+        height: 20px;
+        content: '';
+        position: absolute;
+        background-image: url('../image/clock-mob-r.svg');
+        display: block;
+        top: 11px;
+        left: -14px;
+        
     }
     .working-time-mobile {
         text-align: center;
@@ -1581,7 +1619,10 @@ textarea:focus, input:focus {
         flex-direction: column;
         width: 100%;
         height: calc(100vh - 80px);
-        z-index: 9887222
+        z-index: 9887222;
+        position: relative;
+        max-width: 178px;
+        margin: 0 auto;
     }
     .networks-link-block.mobile {
         display: block;
@@ -2082,7 +2123,8 @@ textarea:focus, input:focus {
     transform-origin: center;
     transform: translate(-50%, -50%) rotate(45deg);
     left: 50%;
-    top: 50%;
+    top: 63%;
+    background-color: white;
     
 }
 .header-menu.active .menu-icon::after {
@@ -2090,8 +2132,23 @@ textarea:focus, input:focus {
     transform: translate(-50%, 50%) rotate(-45deg);
     left: 50%;
     top: 50%;
+    background-color: white;
 }
 
 .header-menu.active .subheader-background {
     transform: translateX(0);
+}
+.header-menu.active {
+    background-color: #00939A;
+}
+.header-menu.active .logo-text-name,
+.header-menu.active .logo-text {
+    color: white;
+}
+.header-menu.active .logo-img path {
+    stroke: #FFFFFF;
+    fill: #FFFFFF;
+}
+.header-menu.active .svg-img path {
+    stroke: #FFFFFF;
 }
