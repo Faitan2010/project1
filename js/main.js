@@ -149,4 +149,13 @@ function Counter(counter) {
     this.plus.addEventListener('click', this.increment);
     this.minus.addEventListener('click', this.decrement);
     this.counterInput.addEventListener('input', this.checkInputValue);
+    
+    
+    const menu = document.querySelector('.menu-icon')
+    const header = document.querySelector('.header-menu')
+
+    menu.addEventListener('click', (e) => {
+    menu.classList.toggle('active')
+    header.classList.toggle('active')
+})
 }
