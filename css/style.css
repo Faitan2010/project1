@@ -1342,7 +1342,7 @@ textarea:focus, input:focus {
         font-size: 16px;
     }
     .sales-grid-header {
-        font-size: 24px;
+        font-size: 23px;
         padding-right: 24px;
         max-width: 200px
     }
@@ -1453,11 +1453,20 @@ textarea:focus, input:focus {
     .menu-icon {
         position: relative;
     }
+    .sales-grid-block.first-block,
+    .sales-grid-block.second-block,
+    .sales-grid-block.third-block,
+    .sales-grid-block.four-block {
+        overflow-x: hidden;
+    }
+    .sales-grid-block.four-block .sales-grid-image .sales-grid-image-first {
+        left: 0;
+    }
     .working-time {
         display: none;
     }
     .sales-grid-header {
-        padding-top: 38px;
+        padding-top: 10px;
     }
     .sales-grid-image-first {
         right: unset;
@@ -1465,7 +1474,7 @@ textarea:focus, input:focus {
     }
     .sales-grid-header {
         padding-right: 0;
-        font-size: 26px;
+        font-size: 23px;
     }
     .third-block .sales-grid-header {
         padding-right: 0;
@@ -1580,7 +1589,7 @@ textarea:focus, input:focus {
     }
     .marketing-text-mobile {
         color: white;
-        padding-top: 35px;
+        padding-top: 12px;
         text-align: center;
         margin: 0 auto;
         font-family: 'Gosha Sans';
@@ -2146,9 +2155,11 @@ textarea:focus, input:focus {
     color: white;
 }
 .header-menu.active .logo-img path {
-    stroke: #FFFFFF;
     fill: #FFFFFF;
 }
 .header-menu.active .svg-img path {
     stroke: #FFFFFF;
+}
+.header-menu.active .svg-img-fill path {
+    fill: white;
 }

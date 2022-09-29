@@ -151,10 +151,18 @@ function Counter(counter) {
     this.counterInput.addEventListener('input', this.checkInputValue);
     
 }
-
-const menu = document.querySelector('.menu-icon')
-    const header = document.querySelector('.header-menu')
-
+    const links = [...document.querySelectorAll(".subheader-menu-link")];
+    const menu = document.querySelector('.menu-icon');
+    const header = document.querySelector('.header-menu');
+    links.forEach((l) => {
+        const href = l.getAttribute('href');
+        if (href.length > 1 && href.includes('#')) {
+            l.addEventListener('click', (e) => {
+                header.classList.toggle('active');
+            })
+        }
+    })
     menu.addEventListener('click', (e) => {
-    header.classList.toggle('active')
+    header.classList.toggle('active');
 })
+
