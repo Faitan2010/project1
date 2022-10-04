@@ -22,17 +22,17 @@ $(document).ready(function () {
         nextArrow: ` <svg class="slayder-arrow next" width="19" height="32" viewBox="0 0 19 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 2L16 16L2 30" stroke="#333333" stroke-width="3" />
 </svg>`,
-    responsive: [
-        {
-          breakpoint: 1025,
-          settings: {
-            infinite: true,
-            dots: true,
-          }
-        }
-    ]
+        responsive: [
+            {
+                breakpoint: 1025,
+                settings: {
+                    infinite: true,
+                    dots: true,
+                }
+            }
+        ]
     });
-    
+
     $('.team-slayder').slick({
         infinite: true,
         slidesToShow: 3,
@@ -43,24 +43,24 @@ $(document).ready(function () {
         nextArrow: ` <svg class="slayder-arrow team-next" width="19" height="32" viewBox="0 0 19 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M2 2L16 16L2 30" stroke="#FFFFFF" stroke-width="3" />
 </svg>`,
-    responsive: [
-        {
-        breakpoint: 1025,
-        settings: {
-            infinite: true,
-            dots: true,
-            slidesToShow: 2,
-        }
-        },
-        {
-        breakpoint: 590,
-        settings: {
-            infinite: true,
-            dots: true,
-            slidesToShow: 1,
-        }
-        }
-    ]
+        responsive: [
+            {
+                breakpoint: 1025,
+                settings: {
+                    infinite: true,
+                    dots: true,
+                    slidesToShow: 2,
+                }
+            },
+            {
+                breakpoint: 590,
+                settings: {
+                    infinite: true,
+                    dots: true,
+                    slidesToShow: 1,
+                }
+            }
+        ]
     });
 
     $('.rewiev-slayder').slick({
@@ -76,43 +76,49 @@ $(document).ready(function () {
         variableWidth: true,
         responsive: [
             {
-            breakpoint: 1025,
-            settings: {
-                infinite: true,
-                dots: true,
-            }
+                breakpoint: 1025,
+                settings: {
+                    infinite: true,
+                    dots: true,
+                }
             }
         ]
     });
-        const headerMenu = document.querySelector('.header-menu');
-        
+    const headerMenu = document.querySelector('.header-menu');
+
     if (window.innerWidth >= 1024) {
         let prevScrollValue = window.scrollY;
-        console.log (window.innerWidth)
         window.addEventListener('scroll', animateHeader);
         function animateHeader() {
             if (prevScrollValue < window.scrollY) {
-    
+
                 if (!headerMenu.classList.contains('header-animate')) {
                     headerMenu.classList.add('header-animate');
                 }
             } else {
-    
+
                 if (headerMenu.classList.contains('header-animate')) {
                     headerMenu.classList.remove('header-animate');
                 }
             }
-    
+
             prevScrollValue = window.scrollY;
         }
     }
 
-    
+
 
     const counterWrappers = [...document.querySelectorAll('.table-column-counter-info')];
 
     counterWrappers.forEach((item) => {
         new Counter(item);
+    });
+
+    const forms = document.querySelectorAll('form');
+
+
+    forms.forEach((item) => {
+        new Form(item)
     });
 });
 
@@ -149,20 +155,110 @@ function Counter(counter) {
     this.plus.addEventListener('click', this.increment);
     this.minus.addEventListener('click', this.decrement);
     this.counterInput.addEventListener('input', this.checkInputValue);
-    
+
 }
-    const links = [...document.querySelectorAll(".subheader-menu-link")];
-    const menu = document.querySelector('.menu-icon');
-    const header = document.querySelector('.header-menu');
-    links.forEach((l) => {
-        const href = l.getAttribute('href');
-        if (href.length > 1 && href.includes('#')) {
-            l.addEventListener('click', (e) => {
-                header.classList.toggle('active');
-            })
-        }
-    })
-    menu.addEventListener('click', (e) => {
+const links = [...document.querySelectorAll(".subheader-menu-link")];
+const menu = document.querySelector('.menu-icon');
+const header = document.querySelector('.header-menu');
+links.forEach((l) => {
+    const href = l.getAttribute('href');
+    if (href.length > 1 && href.includes('#')) {
+        l.addEventListener('click', (e) => {
+            header.classList.toggle('active');
+        })
+    }
+})
+menu.addEventListener('click', (e) => {
     header.classList.toggle('active');
 })
+
+
+
+function Form(form) {
+    if (!form) {
+        return;
+    }
+    console.log(form)
+    this.loader = form.querySelector('.mask-form');
+    this.errorMessages = form.querySelector('.error-messages');
+    this.inputs = form.querySelectorAll('input');
+    console.log(this.inputs);
+    this.inputs.forEach((item) => {
+        const errorBlock = document.createElement('p');
+        errorBlock.innerHTML = 'Введите правильный номер'
+    })
+    this.checkValidate = function (input) {
+        return Boolean(input.value)
+    }
+    this.submitHandler = function (e) {
+        e.preventDefault()
+        
+    }
+
+}
+
+const errorMessages = document.querySelector('.error-messages');
+const loader = document.querySelector('.mask-form')
+const firstForm = document.forms[0];
+const firstFormButton = firstForm.elements.firstSlayderFormButton;
+const firstFormInput = firstForm.elements.firstSlayderFormInput;
+const secondForm = document.forms[1];
+const secondFormButton = secondForm.elements.secondSlayderFormButton;
+const secondFormInput = secondForm.elements.secondSlayderFormInput;
+
+firstFormInput.addEventListener('input', (e) => {
+    errorMessages.classList.remove('active');
+})
+
+firstForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    if (!firstFormInput.value) {
+        setError(errorMessages, 'Введите правильный номер');
+        return;
+    }
+    loader.classList.add('active');
+    setTimeout(function () {
+        loader.classList.remove('active')
+    }, 3000);
+})
+
+
+
+
+const maskOptions = {
+    mask: '+{38}(000)000-00-00'
+};
+InputName(firstFormInput);
+InputName(secondFormInput);
+focusInputs(firstFormInput);
+focusInputs(secondFormInput);
+BlurInputs(firstFormInput)
+BlurInputs(secondFormInput)
+function hideTips() {
+    errorMessages.classList.remove('active');
+}
+
+function setError(errorElem, errorMessage) {
+    errorElem.innerHTML = errorMessage;
+    errorElem.classList.add('active');
+}
+function focusInputs(focusInput) {
+    focusInput.addEventListener('focus', (e) => {
+        focusInput.placeholder = ""
+    })
+}
+function BlurInputs(blurInput) {
+    blurInput.addEventListener('blur', (e) => {
+        blurInput.placeholder = "+7 (923) 123-45-67";
+    })
+}
+function InputName(InputValue) {
+    const mask = IMask(InputValue, maskOptions);
+}
+
+
+
+
+
+
 

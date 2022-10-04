@@ -156,12 +156,18 @@
                     <p class="slayder-subheader">
                         до 31 000 руб./тонна
                     </p>
-                    <form action="#" class="slayder-form">
+                    <form action="#" class="slayder-form" name="slayder-form-one">
+                        <div class="mask-form">
+                            <div class="loader-form">
+                    
+                            </div>
+                        </div>
                         <label for="phone_number" class="slayder-form_label">
                             <input type="text" class="slayder-form_input" id="phone_number"
-                                placeholder="+7 (923) 123-45-67">
+                                placeholder="+7 (923) 123-45-67" name="firstSlayderFormInput">
+                                <p class="error-messages"></p>
                         </label>
-                        <button class="slayder-form-button">
+                        <button class="slayder-form-button" name="firstSlayderFormButton">
                             Заказать обратный звонок
                         </button>
                     </form>
@@ -181,12 +187,17 @@
                     <p class="slayder-subheader">
                         до 31 000 руб./тонна
                     </p>
-                    <form action="#" class="slayder-form">
+                    <form action="#" class="slayder-form" name="slayder-form-two">
+                        <div class="mask-form">
+                            <div class="loader-form">
+                    
+                            </div>
+                        </div>
                         <label for="phone_number" class="slayder-form_label">
-                            <input type="text" class="slayder-form_input" id="phone_number"
+                            <input type="text" class="slayder-form_input" name="secondSlayderFormInput" id="phone_number"
                                 placeholder="+7 (923) 123-45-67">
                         </label>
-                        <button class="slayder-form-button">
+                        <button class="slayder-form-button" name="secondSlayderFormButton">
                             Заказать обратный звонок
                         </button>
                     </form>
@@ -206,7 +217,12 @@
                     <p class="slayder-subheader">
                         до 31 000 руб./тонна
                     </p>
-                    <form action="#" class="slayder-form">
+                    <form action="#" class="slayder-form" name="slayder-form-three">
+                        <div class="mask-form">
+                            <div class="loader-form">
+                    
+                            </div>
+                        </div>
                         <label for="phone_number" class="slayder-form_label">
                             <input type="text" class="slayder-form_input" id="phone_number"
                                 placeholder="+7 (923) 123-45-67">
@@ -688,6 +704,11 @@
             <div class="price-order">
                 <div class="price-order-div container">
                     <form action="#" class="price-order-form">
+                        <div class="mask-form">
+                            <div class="loader-form">
+                    
+                            </div>
+                        </div>
                         <div class="price-order-block first">
                             <h2 class="price-order-header">Заказать вывоз</h2>
                         </div>
@@ -798,6 +819,11 @@
                 </div>
                 <div class="metal-form-text-second">
                     <form action="#" class="metal-form-text-form">
+                        <div class="mask-form">
+                            <div class="loader-form">
+                    
+                            </div>
+                        </div>
                         <p class="metal-form-text">
                             Телефон
                         </p>
@@ -1267,6 +1293,11 @@
                     оставьте заявку
                 </p>
                 <form action="#" class="form-footer">
+                    <div class="mask-form">
+                        <div class="loader-form">
+                
+                        </div>
+                    </div>
                     <p class="footer-form-name">
                         Имя
                     </p>
@@ -1301,6 +1332,7 @@
             </p>
         </div>
     </footer>
+    <script src="https://unpkg.com/imask"></script>
     <script type="text/javascript" src="./libs/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="./libs/slick.js"></script>
     <script src="./js/main.js"></script>
