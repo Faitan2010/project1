@@ -29,16 +29,12 @@ html {
     border-left-color:rgba(0, 147, 154, 1) ;
     animation: loader 1.3s linear infinite;
 }
-.error-messages {
-    display: none;
-}
-.error-messages.active {
+.error-message {
     display: block;
     font-size: 10px;
     color: red;
     margin-top: -15px;
-    padding-bottom: 10px;
-}
+    padding-bottom: 10px;}
 form {
     position: relative;
 }
@@ -1442,7 +1438,7 @@ textarea:focus, input:focus {
         font-size: 35px;
     }
     .price-order-input {
-        width: 50%;
+        width: 100%;
     }
     .price-order-block.second {
         max-width: 566px;

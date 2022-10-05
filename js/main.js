@@ -9,7 +9,9 @@
 // 9 - wow.js
 
 // window.addEventListener('load', () => {})
-
+const maskOptions = {
+    mask: '+{38}(000)000-00-00'
+};
 $(document).ready(function () {
     const mask = document.querySelector('.mask')
     setTimeout(() => {
@@ -178,75 +180,63 @@ function Form(form) {
     if (!form) {
         return;
     }
-    console.log(form)
+    const _this = this;
     this.loader = form.querySelector('.mask-form');
-    this.errorMessages = form.querySelector('.error-messages');
-    this.inputs = form.querySelectorAll('input');
-    console.log(this.inputs);
-    this.inputs.forEach((item) => {
-        const errorBlock = document.createElement('p');
-        errorBlock.innerHTML = 'Введите правильный номер'
-    })
-    this.checkValidate = function (input) {
-        return Boolean(input.value)
+    this.errorMessages = form.querySelector('.error-message');
+    this.formFields = form.querySelectorAll('[name]');
+
+    this.focusInputs = function() {
+        _this.formFields.forEach((item) => {
+            const hasItemPlaceholder = Boolean(item.placeholder);
+            if(!hasItemPlaceholder) {
+                focusInput.addEventListener('focus', (e) => {
+                    focusInput.placeholder = ""
+                })
+            }
+        })
+    }
+
+    this.checkValidate = function () {
+        _this.formFields.forEach((item) => {
+            console.log(item.placeholder);
+            const errorBlock = document.createElement('p');
+            errorBlock.innerHTML = 'Введите правильный номер';
+            const isItemValid = Boolean(item.value);
+            const hasError = item.nextElementSibling && item.nextElementSibling.classList.contains('error-message');
+            if(!isItemValid && !hasError) {
+                const errorBlock = document.createElement('p');
+                errorBlock.innerHTML = 'Введите правильный номер';
+                errorBlock.classList.add('error-message');
+                item.parentElement.appendChild(errorBlock);
+            } else if (isItemValid && hasError) {
+                const errorElem = item.parentElement.querySelector('.error-message');
+                errorElem.parentElement.removeChild(errorElem);
+            }
+        }) 
+        return Boolean(form.querySelector('.error-message'));
     }
     this.submitHandler = function (e) {
-        e.preventDefault()
-        
+        e.preventDefault();
+        const isFormValid = _this.checkValidate();
+        if(!isFormValid) {
+            _this.loader.classList.add('active');
+                setTimeout(function () {
+                    _this.loader.classList.remove('active')
+                }, 3000);
+        }
     }
-
-}
-
-const errorMessages = document.querySelector('.error-messages');
-const loader = document.querySelector('.mask-form')
-const firstForm = document.forms[0];
-const firstFormButton = firstForm.elements.firstSlayderFormButton;
-const firstFormInput = firstForm.elements.firstSlayderFormInput;
-const secondForm = document.forms[1];
-const secondFormButton = secondForm.elements.secondSlayderFormButton;
-const secondFormInput = secondForm.elements.secondSlayderFormInput;
-
-firstFormInput.addEventListener('input', (e) => {
-    errorMessages.classList.remove('active');
-})
-
-firstForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    if (!firstFormInput.value) {
-        setError(errorMessages, 'Введите правильный номер');
-        return;
-    }
-    loader.classList.add('active');
-    setTimeout(function () {
-        loader.classList.remove('active')
-    }, 3000);
-})
-
-
-
-
-const maskOptions = {
-    mask: '+{38}(000)000-00-00'
-};
-InputName(firstFormInput);
-InputName(secondFormInput);
-focusInputs(firstFormInput);
-focusInputs(secondFormInput);
-BlurInputs(firstFormInput)
-BlurInputs(secondFormInput)
-function hideTips() {
-    errorMessages.classList.remove('active');
+    form.addEventListener('submit', this.submitHandler)
 }
 
 function setError(errorElem, errorMessage) {
     errorElem.innerHTML = errorMessage;
     errorElem.classList.add('active');
 }
-function focusInputs(focusInput) {
-    focusInput.addEventListener('focus', (e) => {
-        focusInput.placeholder = ""
-    })
-}
+// function focusInputs(focusInput) {
+//     focusInput.addEventListener('focus', (e) => {
+//         focusInput.placeholder = ""
+//     })
+// }
 function BlurInputs(blurInput) {
     blurInput.addEventListener('blur', (e) => {
         blurInput.placeholder = "+7 (923) 123-45-67";
@@ -255,6 +245,47 @@ function BlurInputs(blurInput) {
 function InputName(InputValue) {
     const mask = IMask(InputValue, maskOptions);
 }
+
+
+// const errorMessages = document.querySelector('.error-messages');
+// const loader = document.querySelector('.mask-form')
+// const firstForm = document.forms[0];
+// const firstFormButton = firstForm.elements.firstSlayderFormButton;
+// const firstFormInput = firstForm.elements.firstSlayderFormInput;
+// const secondForm = document.forms[1];
+// const secondFormButton = secondForm.elements.secondSlayderFormButton;
+// const secondFormInput = secondForm.elements.secondSlayderFormInput;
+
+// firstFormInput.addEventListener('input', (e) => {
+//     errorMessages.classList.remove('active');
+// })
+
+// firstForm.addEventListener('submit', (e) => {
+//     e.preventDefault()
+//     if (!firstFormInput.value) {
+//         setError(errorMessages, 'Введите правильный номер');
+//         return;
+//     }
+//     loader.classList.add('active');
+//     setTimeout(function () {
+//         loader.classList.remove('active')
+//     }, 3000);
+// })
+
+
+
+
+
+// InputName(firstFormInput);
+// InputName(secondFormInput);
+// focusInputs(firstFormInput);
+// focusInputs(secondFormInput);
+// BlurInputs(firstFormInput)
+// BlurInputs(secondFormInput)
+// function hideTips() {
+//     errorMessages.classList.remove('active');
+// }
+
 
 
 
