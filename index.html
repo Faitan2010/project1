@@ -164,7 +164,7 @@
                         </div>
                         <label for="phone_number" class="slayder-form_label">
                             <div class="input-div">
-                                <input type="text" class="slayder-form_input" id="phone_number"
+                                <input type="text" class="slayder-form_input tel" id="phone_number"
                                 placeholder="+7 (923) 123-45-67" name="firstSlayderFormInput">
                             </div>
                         </label>
@@ -196,7 +196,7 @@
                         </div>
                         <label for="phone_number" class="slayder-form_label">
                             <div class="input-div">
-                                <input type="text" class="slayder-form_input" name="secondSlayderFormInput" id="phone_number"
+                                <input type="text" class="slayder-form_input tel" name="secondSlayderFormInput" id="phone_number"
                                 placeholder="+7 (923) 123-45-67">
                             </div>
                         </label>
@@ -228,7 +228,7 @@
                         </div>
                         <label for="phone_number" class="slayder-form_label">
                             <div class="input-div">
-                                <input type="text" class="slayder-form_input" id="phone_number"
+                                <input type="text" class="slayder-form_input tel" id="phone_number"
                                 placeholder="+7 (923) 123-45-67" name="thirdSlayderFormInput">
                             </div>
                         </label>
@@ -708,7 +708,7 @@
             </div>
             <div class="price-order">
                 <div class="price-order-div container">
-                    <form action="#" class="price-order-form">
+                    <form action="#" class="price-order-form orange">
                         <div class="mask-form">
                             <div class="loader-form">
                     
@@ -720,10 +720,10 @@
                         <div class="price-order-block second">
                             <div class="price-order-label">
                                 <div class="input-div">
-                                    <input type="text" value="+7 (923) 123-45-67" class="price-order-input" name="priceOrderInputTel">
+                                    <input type="text" placeholder="+7 (923) 123-45-67" class="price-order-input tel" name="priceOrderInputTel">
                                 </div>
                                 <div class="input-div">
-                                    <input type="text" value="Имя" class="price-order-input" name="priceOrderInputText">
+                                    <input type="text" placeholder="Имя" class="price-order-input name" name="priceOrderInputText">
                                 </div>
                             </div>
                         </div>
@@ -827,7 +827,7 @@
                     </p>
                 </div>
                 <div class="metal-form-text-second">
-                    <form action="#" class="metal-form-text-form">
+                    <form action="#" class="metal-form-text-form green">
                         <div class="mask-form">
                             <div class="loader-form">
                     
@@ -837,10 +837,10 @@
                             Телефон
                         </p>
                         <div class="input-div">
-                            <input type="text" class="metal-form-text-input" value="+7 (923) 123-45-67" name="metalFormTextInputName">
+                            <input type="text" class="metal-form-text-input tel" placeholder="+7 (923) 123-45-67" name="metalFormTextInputName">
                         </div>
-                        <div class="input-div">
-                            <input type="file" class="metal-form-text-file" value="Прикрепить фото"name="metalFormTextInputFile">
+                        <div class="input-div file-div">
+                            <input type="file" class="metal-form-text-file" placeholder="Прикрепить фото"name="metalFormTextInputFile">
                         </div>
                         <button class="metal-form-text-button">
                             Узнать цену
@@ -1305,7 +1305,7 @@
                 <p class="footer-header">
                     оставьте заявку
                 </p>
-                <form action="#" class="form-footer">
+                <form action="#" class="form-footer green">
                     <div class="mask-form">
                         <div class="loader-form">
                 
@@ -1316,7 +1316,7 @@
                     </p>
                     <label>
                         <div class="input-div">
-                            <input type="text" value="Александров Николай" name="FooterInputName">
+                            <input type="text" placeholder="Александров Николай" name="FooterInputName" class="name">
                         </div>
                     </label>
                     <p class="footer-form-number">
@@ -1324,7 +1324,7 @@
                     </p>
                     <label>
                         <div class="input-div">
-                            <input type="text" value="+7 (923) 123-45-67" name="FooterInputTel">
+                            <input type="text" placeholder="+7 (923) 123-45-67" name="FooterInputTel" class="tel">
                         </div>
                     </label>
                     <p class="footer-form-review">
@@ -1351,6 +1351,7 @@
             </p>
         </div>
     </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
     <script src="https://unpkg.com/imask"></script>
     <script type="text/javascript" src="./libs/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="./libs/slick.js"></script>

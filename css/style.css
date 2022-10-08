@@ -9,6 +9,20 @@ html {
     position: relative;
     overflow-x: hidden;
 }
+.green .mask-form {
+    background-color: #00939A;
+}
+.green .loader-form {
+    border: 3px solid rgba(237, 164, 29, 0.6);
+    border-left-color:rgb(237, 164, 29) ;
+}
+.orange .mask-form {
+    background-color: #FF7602;
+}
+.orange .loader-form {
+    border: 3px solid rgba(0, 147, 154, 0.6);
+    border-left-color:rgb(0, 147, 154, 1) ;
+}
 .mask {
     width: 100%;
     height: 100%;
@@ -31,10 +45,11 @@ html {
 }
 .error-message {
     display: block;
-    font-size: 10px;
+    font-size: 14px;
     color: red;
-    margin-top: -15px;
-    padding-bottom: 10px;}
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
 form {
     position: relative;
 }
@@ -239,7 +254,7 @@ a {
     width: 273px;
     height: 49px;
     padding-left: 15px;
-    margin-bottom: 61px;
+    /* margin-bottom: 20px; */
     border: 2px solid #999999;
     display: block;
     width: 100%;
@@ -306,6 +321,7 @@ a {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 16px;
+    margin-bottom: 41px;
 }
 .slayder-form_label {
     display: block;
@@ -507,6 +523,9 @@ a {
     height: 49px;
     background-color: #FF7602;
 }
+.price-order-input::placeholder {
+    color: white;
+}
 .price-order-label {
     display: flex;
     gap: 20px;
@@ -681,14 +700,20 @@ a {
     background-color: #00939A;
     border: 2px solid #FFFFFF;
     color: #FFFFFF;
-    margin-bottom: 14px;
     padding-left: 15px;
     opacity: 0.3
 }
-.metal-form-text-file {
-    margin-bottom: 48px;
-    display: block;
+.metal-form-text-input::placeholder {
+    color: white;
 }
+.metal-form-text-file {
+    display: block;
+    padding-bottom: 48px;
+    padding-top: 10px;
+}
+.file-div .error-message {
+    margin-top: -38px;
+} 
 .metal-form-text-button {
     width: 159px;
     height: 49px;
@@ -1220,6 +1245,9 @@ a {
     line-height: 19px;
     color: #FFFFFF;
 }
+.form-footer input::placeholder {
+    color: white;
+}
 .footer-form-number {
     font-family: 'Gosha Sans';
     font-style: normal;
@@ -1298,6 +1326,12 @@ textarea:focus, input:focus {
     line-height: 19px;
     color: #FFFFFF;
 }
+.form-footer .error-message {
+    margin-top: -20px;
+}
+.textarea-div .error-message {
+    margin-top: -52px;
+}
 .map {
     border: 0;
     width: 607px;
@@ -1344,7 +1378,7 @@ textarea:focus, input:focus {
         max-width: 273px;
     }
     .slayder-form_input {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
     .slayder-info {
         padding-top: 0;
@@ -2054,6 +2088,9 @@ textarea:focus, input:focus {
     .prays-info {
         flex-direction: column;
         justify-content: flex-start;
+    }
+    .slayder-form .error-message {
+        text-align: center;
     }
     .prays-text-header {
         text-align: center;

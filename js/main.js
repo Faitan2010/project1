@@ -166,7 +166,9 @@ links.forEach((l) => {
     const href = l.getAttribute('href');
     if (href.length > 1 && href.includes('#')) {
         l.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024){
             header.classList.toggle('active');
+            }
         })
     }
 })
@@ -184,21 +186,60 @@ function Form(form) {
     this.loader = form.querySelector('.mask-form');
     this.errorMessages = form.querySelector('.error-message');
     this.formFields = form.querySelectorAll('[name]');
+    this.phoneInputs = form.querySelectorAll('.tel');
+    this.nameInputs = form.querySelectorAll('.name');
+
+    this.phoneInput = [...this.formFields].find((p) =>  {
+        return p.classList.contains('tel')
+    });
+
+    this.nameInput = [...this.formFields].find((n) => {
+        return n.classList.contains('name')
+    });
 
     this.focusInputs = function() {
         _this.formFields.forEach((item) => {
             const hasItemPlaceholder = Boolean(item.placeholder);
-            if(!hasItemPlaceholder) {
-                focusInput.addEventListener('focus', (e) => {
-                    focusInput.placeholder = ""
+            if(hasItemPlaceholder) {
+                item.addEventListener('focus', (e) => {
+                    item.placeholder = ""
                 })
             }
         })
+    };
+
+    this.blurInputs = function() {
+        _this.phoneInputs.forEach((item) => {
+            const nullPhone = Boolean(item.placeholder);
+            if(nullPhone) {
+                item.addEventListener('blur', (e) => {
+                    item.placeholder = "+7 (923) 123-45-67"
+                })
+            }
+        })
+    };
+
+    this.blurInputsForName = function() {
+        _this.nameInputs.forEach((item) => {
+            const nullName = Boolean(item.placeholder);
+            if(nullName) {
+                item.addEventListener('blur', (e) => {
+                    item.placeholder = "Александров Николай"
+                })
+            }
+        })
+    };
+
+    
+    this.inputTelMask = function (Input) {
+        if(Input) {
+            const mask = IMask(Input, maskOptions);
+        }
     }
+    this.inputTelMask(_this.phoneInput)
 
     this.checkValidate = function () {
         _this.formFields.forEach((item) => {
-            console.log(item.placeholder);
             const errorBlock = document.createElement('p');
             errorBlock.innerHTML = 'Введите правильный номер';
             const isItemValid = Boolean(item.value);
@@ -225,7 +266,10 @@ function Form(form) {
                 }, 3000);
         }
     }
-    form.addEventListener('submit', this.submitHandler)
+    form.addEventListener('submit', this.submitHandler);
+    this.focusInputs()
+    this.blurInputs()
+    this.blurInputsForName()
 }
 
 function setError(errorElem, errorMessage) {
@@ -237,54 +281,10 @@ function setError(errorElem, errorMessage) {
 //         focusInput.placeholder = ""
 //     })
 // }
-function BlurInputs(blurInput) {
-    blurInput.addEventListener('blur', (e) => {
-        blurInput.placeholder = "+7 (923) 123-45-67";
-    })
-}
-function InputName(InputValue) {
-    const mask = IMask(InputValue, maskOptions);
-}
-
-
-// const errorMessages = document.querySelector('.error-messages');
-// const loader = document.querySelector('.mask-form')
-// const firstForm = document.forms[0];
-// const firstFormButton = firstForm.elements.firstSlayderFormButton;
-// const firstFormInput = firstForm.elements.firstSlayderFormInput;
-// const secondForm = document.forms[1];
-// const secondFormButton = secondForm.elements.secondSlayderFormButton;
-// const secondFormInput = secondForm.elements.secondSlayderFormInput;
-
-// firstFormInput.addEventListener('input', (e) => {
-//     errorMessages.classList.remove('active');
-// })
-
-// firstForm.addEventListener('submit', (e) => {
-//     e.preventDefault()
-//     if (!firstFormInput.value) {
-//         setError(errorMessages, 'Введите правильный номер');
-//         return;
-//     }
-//     loader.classList.add('active');
-//     setTimeout(function () {
-//         loader.classList.remove('active')
-//     }, 3000);
-// })
 
 
 
 
-
-// InputName(firstFormInput);
-// InputName(secondFormInput);
-// focusInputs(firstFormInput);
-// focusInputs(secondFormInput);
-// BlurInputs(firstFormInput)
-// BlurInputs(secondFormInput)
-// function hideTips() {
-//     errorMessages.classList.remove('active');
-// }
 
 
 
