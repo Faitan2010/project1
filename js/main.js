@@ -238,27 +238,63 @@ function Form(form) {
     }
     this.inputTelMask(_this.phoneInput)
 
-    this.checkValidate = function () {
-        _this.formFields.forEach((item) => {
-            const errorBlock = document.createElement('p');
-            errorBlock.innerHTML = 'Введите правильный номер';
-            const isItemValid = Boolean(item.value);
-            const hasError = item.nextElementSibling && item.nextElementSibling.classList.contains('error-message');
-            if(!isItemValid && !hasError) {
-                const errorBlock = document.createElement('p');
-                errorBlock.innerHTML = 'Введите правильный номер';
-                errorBlock.classList.add('error-message');
-                item.parentElement.appendChild(errorBlock);
-            } else if (isItemValid && hasError) {
-                const errorElem = item.parentElement.querySelector('.error-message');
-                errorElem.parentElement.removeChild(errorElem);
+    // this.checkValidate = function () {
+    //     _this.formFields.forEach((item) => {
+            // const errorBlock = document.createElement('p');
+            // errorBlock.innerHTML = 'Введите правильный номер';
+    //         const isItemValid = Boolean(item.value);
+    //         const hasError = item.nextElementSibling && item.nextElementSibling.classList.contains('error-message');
+    //         if(!isItemValid && !hasError) {
+    //             const errorBlock = document.createElement('p');
+    //             errorBlock.innerHTML = 'Введите правильный номер';
+    //             errorBlock.classList.add('error-message');
+    //             item.parentElement.appendChild(errorBlock);
+    //         } else if (isItemValid && hasError) {
+    //             const errorElem = item.parentElement.querySelector('.error-message');
+    //             errorElem.parentElement.removeChild(errorElem);
+    //         }
+    //     }) 
+    //     return Boolean(form.querySelector('.error-message'));
+    // }
+
+
+    this.validation = {} ;
+    this.validation[`${_this.phoneInput.getAttribute('name')}`] = {
+        length: {
+            is: 17,
+            tooShort: 'Введите правильный номер',
+        }
+    };
+    if(this.nameInput){
+        this.validation[`${_this.nameInput.getAttribute('name')}`] = {
+            format: {
+                pattern: "[a-zA-Z0-9 ]+",
+                flags: "i",
+                message: "write correct name"
+            },
+            length: {
+                minimum: 3,
+                message: 'Мало букв',
             }
-        }) 
-        return Boolean(form.querySelector('.error-message'));
+        }
     }
+
+    // this.checkValidate = function () {
+    //     _this.phoneInputs.forEach((item) => {
+    //         const errorBlock = document.createElement('p');
+    //         errorBlock.innerHTML = 'Введите правильный номер';
+    //     })
+    // }
+
     this.submitHandler = function (e) {
         e.preventDefault();
-        const isFormValid = _this.checkValidate();
+        const values = {};
+        values[`${_this.phoneInput.getAttribute('name')}`] = _this.phoneInput.value;
+        if(!this.nameInput) {
+            values[`${_this.nameInput.getAttribute('name')}`] = _this.nameInput.value
+        }
+        const isFormValid = validate(values, _this.validation);
+        console.log(isFormValid);
         if(!isFormValid) {
             _this.loader.classList.add('active');
                 setTimeout(function () {
@@ -281,6 +317,7 @@ function setError(errorElem, errorMessage) {
 //         focusInput.placeholder = ""
 //     })
 // }
+// const isFormValid = validate.async(values, _this.validation).then(_this.checkValidate());
 
 
 
