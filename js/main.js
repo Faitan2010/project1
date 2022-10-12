@@ -12,6 +12,27 @@
 const maskOptions = {
     mask: '+{38}(000)000-00-00'
 };
+const validationRules = {
+    telRules: {
+        length: {
+            is: 17,
+            message: 'Введите правильный номер',
+        }
+    },
+    nameRules: {
+        format: {
+            pattern: "[a-zA-Z ]+",
+            flags: "i",
+            message: "write correct name"
+        },
+        length: {
+            minimum: 3,
+            message: 'Мало букв',
+        }
+    }
+}
+console.log(validationRules.nameRules.length.message);
+
 $(document).ready(function () {
     const mask = document.querySelector('.mask')
     setTimeout(() => {
@@ -238,69 +259,76 @@ function Form(form) {
     }
     this.inputTelMask(_this.phoneInput)
 
-    // this.checkValidate = function () {
-    //     _this.formFields.forEach((item) => {
-            // const errorBlock = document.createElement('p');
-            // errorBlock.innerHTML = 'Введите правильный номер';
-    //         const isItemValid = Boolean(item.value);
-    //         const hasError = item.nextElementSibling && item.nextElementSibling.classList.contains('error-message');
-    //         if(!isItemValid && !hasError) {
-    //             const errorBlock = document.createElement('p');
-    //             errorBlock.innerHTML = 'Введите правильный номер';
-    //             errorBlock.classList.add('error-message');
-    //             item.parentElement.appendChild(errorBlock);
-    //         } else if (isItemValid && hasError) {
-    //             const errorElem = item.parentElement.querySelector('.error-message');
-    //             errorElem.parentElement.removeChild(errorElem);
-    //         }
-    //     }) 
-    //     return Boolean(form.querySelector('.error-message'));
-    // }
-
-
-    this.validation = {} ;
-    this.validation[`${_this.phoneInput.getAttribute('name')}`] = {
-        length: {
-            is: 17,
-            tooShort: 'Введите правильный номер',
-        }
-    };
-    if(this.nameInput){
-        this.validation[`${_this.nameInput.getAttribute('name')}`] = {
-            format: {
-                pattern: "[a-zA-Z0-9 ]+",
-                flags: "i",
-                message: "write correct name"
-            },
-            length: {
-                minimum: 3,
-                message: 'Мало букв',
+    this.setError = function() {
+        const errorBlock = document.createElement('p');
+        
+        const errorElem = _this.phoneInput.parentElement.querySelector('.error-message');
+        errorBlock.innerHTML = `${validationRules.telRules.length.message}`;
+            if(errorElem) {
+                errorElem.parentElement.removeChild(errorElem)
             }
+            errorBlock.classList.add('error-message')
+            _this.phoneInput.parentElement.appendChild(errorBlock);
+        if(_this.nameInput) {
+            const errorElemName = _this.nameInput.parentElement.querySelector('.error-message');
+            const errorBlockName = document.createElement('p');
+        if(validationRules.nameRules.length.message) {
+            errorBlockName.innerHTML = `${validationRules.nameRules.length.message}`
+        } else if (validationRules.nameRules.format.message) {
+            errorBlockName.innerHTML = `${validationRules.nameRules.format.message}`
+        } else if (validationRules.nameRules.length.message && validationRules.nameRules.format.message) {
+            errorBlockName.innerHTML = `${validationRules.nameRules.format.message}`
+        }
+        if(errorElemName) {
+            errorElemName.parentElement.removeChild(errorElemName)
+        }
+        errorBlockName.classList.add('error-message')
+            _this.nameInput.parentElement.appendChild(errorBlockName);
         }
     }
 
-    // this.checkValidate = function () {
-    //     _this.phoneInputs.forEach((item) => {
-    //         const errorBlock = document.createElement('p');
-    //         errorBlock.innerHTML = 'Введите правильный номер';
-    //     })
-    // }
+    this.unsetError = function() {
+        const errorBlock = document.createElement('p');
+        const errorElem = _this.phoneInput.parentElement.querySelector('.error-message');
+        const errorElemName = _this.nameInput.parentElement.querySelector('.error-message');
+        const errorBlockName = document.createElement('p');
+        console.log(validationRules.nameRules.format);
+        if(_this.nameInput.value.length > 2) {
+            errorElemName.parentElement.removeChild(errorElemName);
+        }
+        if(_this.phoneInput.value.length === 17) {
+            errorElem.parentElement.removeChild(errorElem);
+        }
+    }
 
     this.submitHandler = function (e) {
         e.preventDefault();
+       if(_this.nameInput) {
+        const errorElemName = _this.nameInput.parentElement.querySelector('.error-message');
+       }
+        const errorElem = _this.phoneInput.parentElement.querySelector('.error-message');
         const values = {};
-        values[`${_this.phoneInput.getAttribute('name')}`] = _this.phoneInput.value;
-        if(!this.nameInput) {
-            values[`${_this.nameInput.getAttribute('name')}`] = _this.nameInput.value
+        if(_this.phoneInput) {
+            values['telRules'] = _this.phoneInput.value
         }
-        const isFormValid = validate(values, _this.validation);
+        if(_this.nameInput) {
+            values['nameRules'] = _this.nameInput.value
+        }
+        const isFormValid = validate(values, validationRules);
         console.log(isFormValid);
         if(!isFormValid) {
             _this.loader.classList.add('active');
                 setTimeout(function () {
                     _this.loader.classList.remove('active')
+                    errorElem.parentElement.removeChild(errorElem);
+                    errorElemName.parentElement.removeChild(errorElemName);
                 }, 3000);
-        }
+                _this.phoneInput.value = "";
+                _this.nameInput.value = "";
+                return
+            }
+        _this.setError()
+        _this.unsetError()
     }
     form.addEventListener('submit', this.submitHandler);
     this.focusInputs()
@@ -308,16 +336,13 @@ function Form(form) {
     this.blurInputsForName()
 }
 
-function setError(errorElem, errorMessage) {
-    errorElem.innerHTML = errorMessage;
-    errorElem.classList.add('active');
-}
-// function focusInputs(focusInput) {
-//     focusInput.addEventListener('focus', (e) => {
-//         focusInput.placeholder = ""
-//     })
+// function setError() {
+//     // errorElem.innerHTML = errorMessage;
+//     // errorElem.classList.add('active');
+//     const errorBlock = document.createElement('p');
+//     errorBlock.innerHTML = '1';
+//     errorBlock.classList.add('error-message')
 // }
-// const isFormValid = validate.async(values, _this.validation).then(_this.checkValidate());
 
 
 
