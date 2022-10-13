@@ -9,6 +9,7 @@ html {
     position: relative;
     overflow-x: hidden;
 }
+
 .green .mask-form {
     background-color: #00939A;
 }
@@ -47,8 +48,9 @@ html {
     display: block;
     font-size: 14px;
     color: red;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    position: absolute;
+    left: 0;
+    top: 100%;
 }
 form {
     position: relative;
@@ -68,6 +70,9 @@ form {
 .mask-form.active {
     display: flex;
     position: absolute;
+}
+.slayder-form .error-message {
+    padding-top: 10px;
 }
 .loader-form {
     width: 20px;
@@ -514,6 +519,10 @@ a {
     display: flex;
     justify-content: space-between;
 }
+.price-order-form .error-message {
+    padding-top: 10px;
+    color: black;
+}
 .price-order-input {
     display: block;
     padding-left: 15px;
@@ -706,10 +715,15 @@ a {
 .metal-form-text-input::placeholder {
     color: white;
 }
+.metal-form-text-form .error-message {
+    padding-top: 10px;
+    color: orange;
+}
 .metal-form-text-file {
     display: block;
     padding-bottom: 48px;
     padding-top: 10px;
+    margin-top: 25px;
 }
 .file-div .error-message {
     margin-top: -38px;
@@ -993,6 +1007,9 @@ a {
 .choice-flex-block-image .img {
     padding-bottom: 15px;
 }
+.input-div {
+    position: relative;
+}
 .choice-flex-block-text-header {
     font-family: 'Bebas Neue';
     font-style: normal;
@@ -1232,7 +1249,7 @@ a {
     padding-bottom: 10px;
 }
 .form-footer input{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-left: 15px;
     width: 100%;
     height: 49px;
@@ -1256,6 +1273,7 @@ a {
     line-height: 19px;
     color: #FFFFFF;
     padding-bottom: 10px;
+    padding-top: 20px;
 }
 .footer-form-review {
     font-family: 'Gosha Sans';
@@ -1265,6 +1283,7 @@ a {
     line-height: 19px;
     color: #FFFFFF;
     padding-bottom: 10px;
+    padding-top: 20px;
 }
 .form-footer textarea {
     margin-bottom: 52px;
@@ -1327,7 +1346,8 @@ textarea:focus, input:focus {
     color: #FFFFFF;
 }
 .form-footer .error-message {
-    margin-top: -20px;
+    margin-bottom: 10px;
+    color: orange;
 }
 .textarea-div .error-message {
     margin-top: -52px;
@@ -1359,6 +1379,9 @@ textarea:focus, input:focus {
 @media (max-width: 1240px) {
     .phone-number-link {
         font-size: 18px;
+    }
+    .slayder-form-button {
+        margin-top: 25px;
     }
     .price-order-header {
         font-size: 40px;
@@ -1519,6 +1542,9 @@ textarea:focus, input:focus {
 @media (max-width: 1024px) {
     .menu-icon {
         position: relative;
+    }
+    .price-order-input.tel {
+        /* margin-bottom: 25px; */
     }
     .sales-grid-block.first-block,
     .sales-grid-block.second-block,
@@ -1816,7 +1842,7 @@ textarea:focus, input:focus {
     .price-order-label {
         flex-direction: column;
         padding-bottom: 32px;
-        row-gap: 10px;
+        row-gap: 35px;
     }
     .price-order-input {
         width: 320px;
@@ -2091,6 +2117,7 @@ textarea:focus, input:focus {
     }
     .slayder-form .error-message {
         text-align: center;
+        left: calc((100% - 280px) / 2);
     }
     .prays-text-header {
         text-align: center;
@@ -2104,7 +2131,7 @@ textarea:focus, input:focus {
         margin: 0 auto;
     }
     .slayder-form_label {
-        padding-bottom: 16px;
+        padding-bottom: 36px;
     }
     .slayder-form-button {
         width: 320px;
@@ -2141,9 +2168,6 @@ textarea:focus, input:focus {
     .metal-form-text-input {
         width: 280px;
         margin: 0 auto;
-    }
-    .metal-form-text-file {
-        margin-top: 15px;
     }
     .metal-form-text-button {
         width: 280px;

@@ -141,7 +141,8 @@ $(document).ready(function () {
 
 
     forms.forEach((item) => {
-        new Form(item)
+        const form = new Form(item)
+        form.init()
     });
 });
 
@@ -187,8 +188,8 @@ links.forEach((l) => {
     const href = l.getAttribute('href');
     if (href.length > 1 && href.includes('#')) {
         l.addEventListener('click', (e) => {
-            if (window.innerWidth <= 1024){
-            header.classList.toggle('active');
+            if (window.innerWidth <= 1024) {
+                header.classList.toggle('active');
             }
         })
     }
@@ -200,17 +201,15 @@ menu.addEventListener('click', (e) => {
 
 
 function Form(form) {
-    if (!form) {
-        return;
-    }
     const _this = this;
     this.loader = form.querySelector('.mask-form');
     this.errorMessages = form.querySelector('.error-message');
     this.formFields = form.querySelectorAll('[name]');
     this.phoneInputs = form.querySelectorAll('.tel');
     this.nameInputs = form.querySelectorAll('.name');
+    this.textarea = form.querySelector('.textarea')
 
-    this.phoneInput = [...this.formFields].find((p) =>  {
+    this.phoneInput = [...this.formFields].find((p) => {
         return p.classList.contains('tel')
     });
 
@@ -218,10 +217,10 @@ function Form(form) {
         return n.classList.contains('name')
     });
 
-    this.focusInputs = function() {
+    this.focusInputs = function () {
         _this.formFields.forEach((item) => {
             const hasItemPlaceholder = Boolean(item.placeholder);
-            if(hasItemPlaceholder) {
+            if (hasItemPlaceholder) {
                 item.addEventListener('focus', (e) => {
                     item.placeholder = ""
                 })
@@ -229,10 +228,10 @@ function Form(form) {
         })
     };
 
-    this.blurInputs = function() {
+    this.blurInputs = function () {
         _this.phoneInputs.forEach((item) => {
             const nullPhone = Boolean(item.placeholder);
-            if(nullPhone) {
+            if (nullPhone) {
                 item.addEventListener('blur', (e) => {
                     item.placeholder = "+7 (923) 123-45-67"
                 })
@@ -240,10 +239,10 @@ function Form(form) {
         })
     };
 
-    this.blurInputsForName = function() {
+    this.blurInputsForName = function () {
         _this.nameInputs.forEach((item) => {
             const nullName = Boolean(item.placeholder);
-            if(nullName) {
+            if (nullName) {
                 item.addEventListener('blur', (e) => {
                     item.placeholder = "Александров Николай"
                 })
@@ -251,99 +250,106 @@ function Form(form) {
         })
     };
 
-    
+
     this.inputTelMask = function (Input) {
-        if(Input) {
+        if (Input) {
             const mask = IMask(Input, maskOptions);
         }
     }
     this.inputTelMask(_this.phoneInput)
 
-    this.setError = function() {
-        const errorBlock = document.createElement('p');
-        
-        const errorElem = _this.phoneInput.parentElement.querySelector('.error-message');
-        errorBlock.innerHTML = `${validationRules.telRules.length.message}`;
-            if(errorElem) {
-                errorElem.parentElement.removeChild(errorElem)
-            }
-            errorBlock.classList.add('error-message')
-            _this.phoneInput.parentElement.appendChild(errorBlock);
-        if(_this.nameInput) {
-            const errorElemName = _this.nameInput.parentElement.querySelector('.error-message');
-            const errorBlockName = document.createElement('p');
-        if(validationRules.nameRules.length.message) {
-            errorBlockName.innerHTML = `${validationRules.nameRules.length.message}`
-        } else if (validationRules.nameRules.format.message) {
-            errorBlockName.innerHTML = `${validationRules.nameRules.format.message}`
-        } else if (validationRules.nameRules.length.message && validationRules.nameRules.format.message) {
-            errorBlockName.innerHTML = `${validationRules.nameRules.format.message}`
+    this.setError = function (input, message) {
+        if (!input) {
+            return
         }
-        if(errorElemName) {
-            errorElemName.parentElement.removeChild(errorElemName)
-        }
-        errorBlockName.classList.add('error-message')
-            _this.nameInput.parentElement.appendChild(errorBlockName);
-        }
+        const errorElem = input.parentElement.querySelector('.error-message');
+        errorElem.innerHTML = message;
     }
 
-    this.unsetError = function() {
-        const errorBlock = document.createElement('p');
-        const errorElem = _this.phoneInput.parentElement.querySelector('.error-message');
-        const errorElemName = _this.nameInput.parentElement.querySelector('.error-message');
-        const errorBlockName = document.createElement('p');
-        console.log(validationRules.nameRules.format);
-        if(_this.nameInput.value.length > 2) {
-            errorElemName.parentElement.removeChild(errorElemName);
+    this.unsetError = function (input) {
+        if (!input) {
+            return
         }
-        if(_this.phoneInput.value.length === 17) {
-            errorElem.parentElement.removeChild(errorElem);
-        }
+        const errorElem = input.parentElement.querySelector('.error-message');
+        errorElem.innerHTML = "";
     }
 
     this.submitHandler = function (e) {
         e.preventDefault();
-       if(_this.nameInput) {
-        const errorElemName = _this.nameInput.parentElement.querySelector('.error-message');
-       }
-        const errorElem = _this.phoneInput.parentElement.querySelector('.error-message');
+
         const values = {};
-        if(_this.phoneInput) {
-            values['telRules'] = _this.phoneInput.value
+        const dataInfo = {}
+        if (_this.phoneInput) {
+            dataInfo['user-phone'] = _this.phoneInput.value
         }
-        if(_this.nameInput) {
-            values['nameRules'] = _this.nameInput.value
+        if (_this.nameInput) {
+            dataInfo['user-name'] = _this.nameInput.value
         }
-        const isFormValid = validate(values, validationRules);
-        console.log(isFormValid);
-        if(!isFormValid) {
-            _this.loader.classList.add('active');
+        if (this.textarea) {
+            dataInfo['user-message'] = _this.textarea.value
+        }
+
+        console.log(dataInfo);
+        if (_this.phoneInput) {
+            values['telRules'] = _this.phoneInput.value;
+            _this.unsetError(_this.phoneInput)
+        }
+        if (_this.nameInput) {
+            values['nameRules'] = _this.nameInput.value;
+            _this.unsetError(_this.nameInput)
+        }
+
+        const checkValidate = validate(values, validationRules);
+        if (checkValidate) {
+            if (checkValidate.telRules) {
+                _this.setError(_this.phoneInput, checkValidate.telRules[0])
+            }
+            if (checkValidate.nameRules) {
+                _this.setError(_this.nameInput, checkValidate.nameRules[0])
+            }
+            return
+        }
+        _this.loader.classList.add('active');
+        fetch('https://m1.ondev.in/api.php', {
+            method: 'POST',
+            body: JSON.stringify(dataInfo),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(JSON.stringify(data))
                 setTimeout(function () {
                     _this.loader.classList.remove('active')
-                    errorElem.parentElement.removeChild(errorElem);
-                    errorElemName.parentElement.removeChild(errorElemName);
-                }, 3000);
-                _this.phoneInput.value = "";
-                _this.nameInput.value = "";
-                return
-            }
-        _this.setError()
-        _this.unsetError()
+                }, 500);
+            })
+            .catch((err) => console.log(err))
+        _this.phoneInput.value = "";
+        if (_this.nameInput) {
+            _this.nameInput.value = "";
+        }
     }
-    form.addEventListener('submit', this.submitHandler);
-    this.focusInputs()
-    this.blurInputs()
-    this.blurInputsForName()
+    this.init = () => {
+        if (!form) {
+            return;
+        }
+        form.addEventListener('submit', this.submitHandler);
+        this.focusInputs()
+        this.blurInputs()
+        this.blurInputsForName()
+        if (this.phoneInput) {
+            this.phoneInput.addEventListener('input', () => {
+                _this.unsetError(_this.phoneInput)
+            })
+        }
+        if (this.nameInput) {
+            this.nameInput.addEventListener('input', () => {
+                _this.unsetError(_this.nameInput)
+            })
+        }
+    }
 }
-
-// function setError() {
-//     // errorElem.innerHTML = errorMessage;
-//     // errorElem.classList.add('active');
-//     const errorBlock = document.createElement('p');
-//     errorBlock.innerHTML = '1';
-//     errorBlock.classList.add('error-message')
-// }
-
 
 
 
