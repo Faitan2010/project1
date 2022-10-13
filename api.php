@@ -12,7 +12,7 @@ if ($_POST['test']) {
 
 $post_data = $_POST['dataInfo'];
 
-if (!$post_data) {
+if (!isset($post_data)) {
     echo json_encode( array(
         'status' => false,
         'message' => 'Error. Illegal data',

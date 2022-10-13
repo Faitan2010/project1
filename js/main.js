@@ -278,7 +278,7 @@ function Form(form) {
         e.preventDefault();
 
         const values = {};
-        const dataInfo = {}
+        const dataInfo = {};
         if (_this.phoneInput) {
             dataInfo['user-phone'] = _this.phoneInput.value
         }
@@ -289,7 +289,7 @@ function Form(form) {
             dataInfo['user-message'] = _this.textarea.value
         }
 
-        console.log(dataInfo);
+
         if (_this.phoneInput) {
             values['telRules'] = _this.phoneInput.value;
             _this.unsetError(_this.phoneInput)
@@ -310,12 +310,12 @@ function Form(form) {
             return
         }
         _this.loader.classList.add('active');
+
+        const dataToSend = new FormData()
+        dataToSend.set('dataInfo', JSON.stringify(dataInfo))
         fetch('https://m1.ondev.in/api.php', {
             method: 'POST',
-            body: JSON.stringify(dataInfo),
-            headers: {
-                'Content-Type': 'application/json'
-            }
+            body: dataToSend,
         })
             .then((res) => res.json())
             .then((data) => {

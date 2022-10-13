@@ -1543,9 +1543,6 @@ textarea:focus, input:focus {
     .menu-icon {
         position: relative;
     }
-    .price-order-input.tel {
-        /* margin-bottom: 25px; */
-    }
     .sales-grid-block.first-block,
     .sales-grid-block.second-block,
     .sales-grid-block.third-block,
