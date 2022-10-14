@@ -34,7 +34,7 @@ if (!$post_data['user-phone']) {
 
 echo json_encode(array(
     'status' => true,
-    'message' => 'Thanks for request! We\'ll recall you by ' . $post_data['user-phone'] . 'as quick as possible',
+    'message' => 'Thanks for request! We\'ll recall you by ' . $post_data['user-phone'] . ' as quick as possible',
 ));
 
 exit;
