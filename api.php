@@ -21,7 +21,7 @@ if (!isset($post_data)) {
     die();
 }
 
-$post_data = json_decode($post_data);
+$post_data = json_decode($post_data, true);
 
 if (!$post_data['user-phone']) {
     echo json_encode( array(
