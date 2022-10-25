@@ -16,7 +16,7 @@ const validationRules = {
     telRules: {
         length: {
             is: 17,
-            message: 'Введите правильный номер',
+            message: 'Enter the correct number',
         }
     },
     nameRules: {
@@ -27,7 +27,7 @@ const validationRules = {
         },
         length: {
             minimum: 3,
-            message: 'Мало букв',
+            message: 'Few letters',
         }
     }
 }
@@ -207,8 +207,9 @@ function Form(form) {
     this.formFields = form.querySelectorAll('[name]');
     this.phoneInputs = form.querySelectorAll('.tel');
     this.nameInputs = form.querySelectorAll('.name');
-    this.textarea = form.querySelector('.textarea')
+    this.textarea = form.querySelector('.textarea');
 
+    this.resultMessage = null;
     this.phoneInput = [...this.formFields].find((p) => {
         return p.classList.contains('tel')
     });
@@ -244,12 +245,17 @@ function Form(form) {
             const nullName = Boolean(item.placeholder);
             if (nullName) {
                 item.addEventListener('blur', (e) => {
-                    item.placeholder = "Александров Николай"
+                    item.placeholder = "Aleksandrov Nikolay"
                 })
             }
         })
     };
-
+    this.createResultMessage = () => {
+        const elem = document.createElement('div');
+        elem.classList.add('form-result-message');
+        form.append(elem);
+        _this.resultMessage = elem;
+    }
 
     this.inputTelMask = function (Input) {
         if (Input) {
@@ -274,6 +280,16 @@ function Form(form) {
         errorElem.innerHTML = "";
     }
 
+
+    this.messageAfterValidate = function (status, message) {
+        _this.resultMessage.innerHTML = message;
+        if(status) {
+            _this.resultMessage.classList.add('success-message')
+            return
+        }
+        _this.resultMessage.classList.add('reject-message')
+    }
+
     this.submitHandler = function (e) {
         e.preventDefault();
 
@@ -285,7 +301,7 @@ function Form(form) {
         if (_this.nameInput) {
             dataInfo['user-name'] = _this.nameInput.value
         }
-        if (this.textarea) {
+        if (_this.textarea) {
             dataInfo['user-message'] = _this.textarea.value
         }
 
@@ -319,12 +335,14 @@ function Form(form) {
         })
             .then((res) => res.json())
             .then((data) => {
-                console.log(JSON.stringify(data))
-                setTimeout(function () {
-                    _this.loader.classList.remove('active')
-                }, 500);
+                _this.messageAfterValidate(data.status, data.message)
             })
-            .catch((err) => console.log(err))
+            .catch(() => {
+                _this.messageAfterValidate(false, 'Network error. Please try again later')
+            })
+            .finally(() => {
+                _this.loader.classList.remove('active')
+            })
         _this.phoneInput.value = "";
         if (_this.nameInput) {
             _this.nameInput.value = "";
@@ -334,6 +352,7 @@ function Form(form) {
         if (!form) {
             return;
         }
+        this.createResultMessage();
         form.addEventListener('submit', this.submitHandler);
         this.focusInputs()
         this.blurInputs()

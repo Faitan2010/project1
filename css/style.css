@@ -90,6 +90,12 @@ form {
 .menu-icon {
     display: none;
 }
+.success-message {
+    color: lightgreen;
+}
+.reject-message {
+    color: rgb(92, 0, 0);
+}
 .mask-none {
     opacity: 0;
     z-index: -1;
@@ -833,6 +839,9 @@ a {
 }
 .hide {
     opacity: 0;
+}
+.first-block .sales-grid-header {
+    padding-right: 60px;
 }
 .second-block .sales-grid-info {
     padding-right: 75px;
@@ -2216,6 +2225,31 @@ textarea:focus, input:focus {
     .sum-counter {
         /* padding-left: 15px; */
     }
+    .table-column-price-volume-text {
+        font-size: 12px;
+    }
+    .table-column-block-text {
+        font-size: 18px;
+    }
+    .sales-grid-header {
+        line-height: 30px;
+        width: 100px;
+    }
+    .sales-grid-info {
+        font-size: 13px;
+    }
+    .sales-grid-image-first {
+        left: -10px;
+    }
+    .sales-grid-info {
+        padding-right: unset;
+    }
+}
+.first-block .sales-grid-header {
+    padding-right: unset;
+}
+.first-block .sales-grid-image-first {
+    left: 0;
 }
 .header-menu.active .menu-icon-line {
     display: none;
