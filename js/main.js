@@ -144,6 +144,25 @@ $(document).ready(function () {
         const form = new Form(item)
         form.init()
     });
+    const modalClose = document.querySelector('.modal-close');
+    const modal = document.querySelector('.modal');
+    const modalText = document.querySelector('.modal-content')
+    if(modalClose) {
+        modalClose.addEventListener('click', (e) => {
+            modal.classList.remove('open')
+        })
+    }
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (modalText) {
+                return
+            }
+            modal.classList.remove('open')
+            // if (target === modal) {
+            //     target.classList.remove('open')
+            // }
+        })
+    }
 });
 
 function Counter(counter) {
@@ -208,6 +227,22 @@ function Form(form) {
     this.phoneInputs = form.querySelectorAll('.tel');
     this.nameInputs = form.querySelectorAll('.name');
     this.textarea = form.querySelector('.textarea');
+    this.modal = document.querySelector('.modal');
+    this.lockPadding = document.querySelector('.lock-padding')
+    // let unlock = true;
+
+    // if(modalLinks.length > 0) {
+    //     for(let i = 0; i < modalLinks.length; i++) {
+    //         const modalLink = modalLinks[i];
+    //         modalLink.addEventListener('click', function(e) {
+    //             const modalName = 
+    //             const currentModal = 
+    //         })
+    //     }
+    // }
+
+
+
 
     this.resultMessage = null;
     this.phoneInput = [...this.formFields].find((p) => {
@@ -283,7 +318,7 @@ function Form(form) {
 
     this.messageAfterValidate = function (status, message) {
         _this.resultMessage.innerHTML = message;
-        if(status) {
+        if (status) {
             _this.resultMessage.classList.add('success-message')
             return
         }
@@ -327,22 +362,29 @@ function Form(form) {
         }
         _this.loader.classList.add('active');
 
-        const dataToSend = new FormData()
-        dataToSend.set('dataInfo', JSON.stringify(dataInfo))
-        fetch('https://m1.ondev.in/api.php', {
-            method: 'POST',
-            body: dataToSend,
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                _this.messageAfterValidate(data.status, data.message)
-            })
-            .catch(() => {
-                _this.messageAfterValidate(false, 'Network error. Please try again later')
-            })
-            .finally(() => {
-                _this.loader.classList.remove('active')
-            })
+        setTimeout(function() {
+            _this.loader.classList.remove('active');
+            _this.modal.classList.add('open')
+
+        }, 2000);
+        
+
+        // const dataToSend = new FormData()
+        // dataToSend.set('dataInfo', JSON.stringify(dataInfo))
+        // fetch('https://m1.ondev.in/api.php', {
+        //     method: 'POST',
+        //     body: dataToSend,
+        // })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         _this.messageAfterValidate(data.status, data.message)
+        //     })
+        //     .catch(() => {
+        //         _this.messageAfterValidate(false, 'Network error. Please try again later')
+        //     })
+        //     .finally(() => {
+        //         _this.loader.classList.remove('active')
+        //     })
         _this.phoneInput.value = "";
         if (_this.nameInput) {
             _this.nameInput.value = "";

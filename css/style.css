@@ -2289,3 +2289,53 @@ textarea:focus, input:focus {
 .header-menu.active .svg-img-fill path {
     fill: white;
 }
+.modal {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    cursor: pointer;
+}
+.modal-block {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.modal-content{
+    background-color: #FFFFFF;
+    color: #00939A;
+    max-width: 500px;
+    padding: 20px;
+    padding-top: 10px;
+    position: relative;
+    cursor: default;
+}
+.modal-close {
+    position: absolute;
+    top: 13px;
+    right: 10px;
+}
+.modal-title{
+    font-size: 24px;
+    padding-bottom: 8px;
+    color: #00939A;
+}
+.modal-text{
+    font-size: 18px;
+    color: #00939A;
+}
+.modal-close-icon {
+    width: 20px;
+    height: 20px;
+}
+.modal.open {
+    opacity: 1;
+    visibility: visible;
+}
