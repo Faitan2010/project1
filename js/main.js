@@ -154,13 +154,7 @@ $(document).ready(function () {
     }
     if (modal) {
         modal.addEventListener('click', (e) => {
-            if (modalText) {
-                return
-            }
-            modal.classList.remove('open')
-            // if (target === modal) {
-            //     target.classList.remove('open')
-            // }
+            e.target.classList.remove('open')
         })
     }
 });

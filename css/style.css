@@ -2300,9 +2300,6 @@ textarea:focus, input:focus {
     opacity: 0;
     visibility: hidden;
     cursor: pointer;
-}
-.modal-block {
-    min-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
