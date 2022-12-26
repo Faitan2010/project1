@@ -146,7 +146,6 @@ $(document).ready(function () {
     });
     const modalClose = document.querySelector('.modal-close');
     const modal = document.querySelector('.modal');
-    const modalText = document.querySelector('.modal-content')
     if(modalClose) {
         modalClose.addEventListener('click', (e) => {
             modal.classList.remove('open')
