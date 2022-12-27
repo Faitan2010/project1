@@ -7,6 +7,7 @@
 // 7 - file input
 // 8 - animate icons
 // 9 - wow.js
+// 10!!!! - закрытие модалки по esc (window.addEventListener ('keypress'))
 
 // window.addEventListener('load', () => {})
 const maskOptions = {
@@ -160,9 +161,13 @@ function Modal() {
         if(e.target.dataset.close) {
             _this.modal.classList.remove('open');
         }
+        if (e.key === 'Escape') {
+            _this.modal.classList.remove('open');
+        }
     }
     this.init = () => {
         _this.modal.addEventListener('click', _this.close);
+        document.addEventListener('keydown', _this.close)
     }
 }
 
