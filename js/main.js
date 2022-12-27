@@ -139,24 +139,33 @@ $(document).ready(function () {
 
     const forms = document.querySelectorAll('form');
 
+    const modal = new Modal()
+    modal.init()
 
     forms.forEach((item) => {
-        const form = new Form(item)
+        const form = new Form(item, modal)
         form.init()
     });
-    const modalClose = document.querySelector('.modal-close');
-    const modal = document.querySelector('.modal');
-    if(modalClose) {
-        modalClose.addEventListener('click', (e) => {
-            modal.classList.remove('open')
-        })
-    }
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            e.target.classList.remove('open')
-        })
-    }
+
 });
+
+function Modal() {
+    this.modal = document.querySelector('.modal');
+    const _this = this;
+    this.open = function(e){
+        _this.modal.classList.add('open')
+    }
+    this.close = function(e) {
+        e.preventDefault;
+        if(e.target.dataset.close) {
+            _this.modal.classList.remove('open');
+        }
+    }
+    this.init = () => {
+        _this.modal.addEventListener('click', _this.close);
+    }
+}
+
 
 function Counter(counter) {
     if (!counter) {
@@ -212,7 +221,7 @@ menu.addEventListener('click', (e) => {
 
 
 
-function Form(form) {
+function Form(form, modal) {
     const _this = this;
     this.loader = form.querySelector('.mask-form');
     this.errorMessages = form.querySelector('.error-message');
@@ -220,7 +229,6 @@ function Form(form) {
     this.phoneInputs = form.querySelectorAll('.tel');
     this.nameInputs = form.querySelectorAll('.name');
     this.textarea = form.querySelector('.textarea');
-    this.modal = document.querySelector('.modal');
     this.lockPadding = document.querySelector('.lock-padding')
     // let unlock = true;
 
@@ -357,7 +365,7 @@ function Form(form) {
 
         setTimeout(function() {
             _this.loader.classList.remove('active');
-            _this.modal.classList.add('open')
+            modal.open()
 
         }, 2000);
         
