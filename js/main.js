@@ -157,14 +157,28 @@ function Modal() {
         _this.modal.classList.add('open')
     }
     this.close = function(e) {
+        // TODO: preventDefault - it's a function! fix it
         e.preventDefault;
-        if(e.target.dataset.close) {
-            _this.modal.classList.remove('open');
-        }
-        if (e.key === 'Escape') {
+
+        const isClose = _this.isEventClose(e);
+
+        if(isClose) {
             _this.modal.classList.remove('open');
         }
     }
+
+    /**
+     * @param event - event object from EventListener.
+     * @returns {boolean} - true if event target has data attribute equals True or event key is Escape
+     */
+    this.isEventClose = (event) => {
+        if (!event) {
+            return false;
+        }
+
+        return event.target.dataset.close || event.key === 'Escape';
+    }
+
     this.init = () => {
         _this.modal.addEventListener('click', _this.close);
         document.addEventListener('keydown', _this.close)
@@ -373,7 +387,7 @@ function Form(form, modal) {
             modal.open()
 
         }, 2000);
-        
+
 
         // const dataToSend = new FormData()
         // dataToSend.set('dataInfo', JSON.stringify(dataInfo))
