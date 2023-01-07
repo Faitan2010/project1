@@ -230,12 +230,10 @@ function Modal() {
         _this.modal.classList.add('open')
     }
     this.close = function(e) {
-        // TODO: preventDefault - it's a function! fix it
-        e.preventDefault();
-
         const isClose = _this.isEventClose(e);
 
         if(isClose) {
+            e.preventDefault();
             _this.modal.classList.remove('open');
         }
     }
