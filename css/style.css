@@ -9,7 +9,9 @@ html {
     position: relative;
     overflow-x: hidden;
 }
-
+.hidden-block {
+    display: none;
+}
 .green .mask-form {
     background-color: #00939A;
 }
@@ -501,6 +503,15 @@ a {
     font-size: 20px;
     line-height: 150%;
     color: #FF7602;
+}
+.sum-counter-text {
+    font-family: 'Gosha Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    color: #FF7602;
+    display: none;
 }
 .table-column-counter-info-text {
     border: none;

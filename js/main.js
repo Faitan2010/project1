@@ -1,14 +1,13 @@
-// 1 - sliders (+)
-// 2 - animate header (+)
-// 3 - loader (+)
-// 4 - submit forms
-// 5 - modal window
 // 6 - counters
 // 7 - file input
 // 8 - animate icons
 // 9 - wow.js
-// 10!!!! - закрытие модалки по esc (window.addEventListener ('keypress'))
-
+// 10!!!! - закрытие модалки по esc (wind ow.addEventListener ('keypress'))
+// 11!!! сделать дефолтное значение (ццена за кг) заменить не дефолтное значение (\кг)
+// 12!!! переписать на файнд индекс.,
+// 13!! убрать disable select 
+// 14!! codewars!!!!!!
+// 15!!! разобраться с wow js 
 // window.addEventListener('load', () => {})
 const maskOptions = {
     mask: '+{38}(000)000-00-00'
@@ -132,10 +131,12 @@ $(document).ready(function () {
 
 
 
-    const counterWrappers = [...document.querySelectorAll('.table-column-counter-info')];
+    const counterWrappers = [...document.querySelectorAll('.table-column')];
+    // const counterWrappers = [...document.querySelectorAll('.table-column-counter-info')];
 
     counterWrappers.forEach((item) => {
-        new Counter(item);
+        const counter = new Counter(item);
+        counter.init()
     });
 
     const forms = document.querySelectorAll('form');
@@ -149,6 +150,73 @@ $(document).ready(function () {
     });
 
 });
+
+
+function Counter(counter) {
+    if (!counter) {
+        return;
+    }
+    this.plus = counter.querySelector('.span-plus');
+    this.minus = counter.querySelector('.span-minus');
+    this.counterInput = counter.querySelector('.table-column-counter-info-text');
+    this.pricesElements = [...counter.querySelectorAll('.volume-value')];
+    this.prices = []
+    this.pricesValueElements = [...counter.querySelectorAll('.price-value')];
+    this.pricesValues = []
+    this.result = counter.querySelector('.numbers');
+    this.defaultLetter = counter.querySelector('.sum-counter-text');
+    const _this = this;
+
+    this.createPrices = (collection, arrayOfValues) => {
+        collection.forEach((item) => {
+            const priceNumber = item.innerHTML.replace(/ /g,'');
+            arrayOfValues.push(Number(priceNumber))
+        })
+    }
+
+    this.increment = (e) => {
+        e.preventDefault();
+
+        this.counterInput.value = Number(this.counterInput.value) + 1;
+        _this.priceTable()
+    }
+
+    this.decrement = (e) => {
+        e.preventDefault();
+
+        if (this.counterInput.value <= 0) {
+            return
+        }
+        this.counterInput.value = Number(this.counterInput.value) - 1;
+        _this.priceTable()
+    }
+
+    this.checkInputValue = (e) => {
+        if (isNaN(this.counterInput.value)) {
+            this.counterInput.value = 0;
+        }
+    }
+    this.priceTable = () => {
+        let priceIndex = 0;
+        
+        if (Number(_this.counterInput.value) === 0) {
+            _this.result.innerHTML = this.pricesValues[priceIndex] + _this.defaultLetter.innerHTML;
+            return
+        }
+        _this.result.innerHTML = this.pricesValues[priceIndex] * Number(_this.counterInput.value) + ' $';
+    }
+
+    this.init = () => {
+        this.createPrices(this.pricesElements, this.prices);
+        this.createPrices(this.pricesValueElements, this.pricesValues)
+        this.priceTable()
+        // console.log(this.pricesValues);
+        this.plus.addEventListener('click', this.increment);
+        this.minus.addEventListener('click', this.decrement);
+        this.counterInput.addEventListener('input', this.checkInputValue);
+    }
+
+}
 
 function Modal() {
     this.modal = document.querySelector('.modal');
@@ -171,42 +239,6 @@ function Modal() {
     }
 }
 
-
-function Counter(counter) {
-    if (!counter) {
-        return;
-    }
-
-    this.plus = counter.querySelector('.span-plus');
-    this.minus = counter.querySelector('.span-minus');
-    this.counterInput = counter.querySelector('.table-column-counter-info-text');
-
-    this.increment = (e) => {
-        e.preventDefault();
-
-        this.counterInput.value = Number(this.counterInput.value) + 1;
-    }
-
-    this.decrement = (e) => {
-        e.preventDefault();
-
-        if (this.counterInput.value <= 0) {
-            return
-        }
-        this.counterInput.value = Number(this.counterInput.value) - 1;
-    }
-
-    this.checkInputValue = (e) => {
-        if (isNaN(this.counterInput.value)) {
-            this.counterInput.value = 0;
-        }
-    }
-
-    this.plus.addEventListener('click', this.increment);
-    this.minus.addEventListener('click', this.decrement);
-    this.counterInput.addEventListener('input', this.checkInputValue);
-
-}
 const links = [...document.querySelectorAll(".subheader-menu-link")];
 const menu = document.querySelector('.menu-icon');
 const header = document.querySelector('.header-menu');
@@ -428,3 +460,9 @@ function Form(form, modal) {
 
 
 
+// _this.prices.forEach((priceItem, priceIdx) => {
+        //     if (Number(_this.counterInput.value) > (priceItem - 1)) {
+        //         priceIndex = priceIdx
+        //         return
+        //     }
+        // })
