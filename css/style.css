@@ -418,6 +418,7 @@ a {
     display: block;
     width: 116px;
     height: 77px;
+    /* user-select: none; */
 }
 .table-column-block-text {
     padding-left: 27px;
@@ -427,6 +428,7 @@ a {
     font-size: 16px;
     line-height: 150%;
     color: #333333;
+    /* user-select: none; */
 }
 .table-column-price {
     display: flex;
@@ -495,6 +497,7 @@ a {
     font-size: 20px;
     line-height: 150%;
     color: #FF7602;
+    /* user-select: none; */
 }
 .sum-counter {
     font-family: 'Gosha Sans';

@@ -198,7 +198,12 @@ function Counter(counter) {
     }
     this.priceTable = () => {
         let priceIndex = 0;
-        
+        _this.prices.findIndex((priceItem, priceIdx) => {
+            if (Number(_this.counterInput.value) > (priceItem - 1)) {
+                priceIndex = priceIdx
+                return
+            }
+        })
         if (Number(_this.counterInput.value) === 0) {
             _this.result.innerHTML = this.pricesValues[priceIndex] + _this.defaultLetter.innerHTML;
             return
@@ -226,7 +231,7 @@ function Modal() {
     }
     this.close = function(e) {
         // TODO: preventDefault - it's a function! fix it
-        e.preventDefault;
+        e.preventDefault();
 
         const isClose = _this.isEventClose(e);
 
@@ -474,9 +479,3 @@ function Form(form, modal) {
 
 
 
-// _this.prices.forEach((priceItem, priceIdx) => {
-        //     if (Number(_this.counterInput.value) > (priceItem - 1)) {
-        //         priceIndex = priceIdx
-        //         return
-        //     }
-        // })
