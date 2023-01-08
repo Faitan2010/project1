@@ -196,25 +196,38 @@ function Counter(counter) {
             this.counterInput.value = 0;
         }
     }
-    this.priceTable = () => {
-        let priceIndex = 0;
-        _this.prices.findIndex((priceItem, priceIdx) => {
-            if (Number(_this.counterInput.value) > (priceItem - 1)) {
-                priceIndex = priceIdx
-                return
-            }
+
+    this.getPriceIndex = (valueToCompare) => {
+        if (!valueToCompare) {
+            return 0;
+        }
+
+        if (valueToCompare >= _this.prices[_this.prices.length - 1]) {
+            return (_this.prices.length - 1);
+        }
+
+        return _this.prices.findIndex((item, idx) => {
+            return valueToCompare >= item && valueToCompare < _this.prices[idx + 1];
         })
-        if (Number(_this.counterInput.value) === 0) {
-            _this.result.innerHTML = this.pricesValues[priceIndex] + _this.defaultLetter.innerHTML;
+    }
+
+    this.priceTable = () => {
+        const value = Number(_this.counterInput.value);
+        const priceIndex = _this.getPriceIndex(value);
+        const currentPrice = _this.pricesValues[priceIndex];
+
+        if (!value) {
+            _this.result.innerHTML = _this.pricesValues[0] + _this.defaultLetter.innerHTML;
             return
         }
-        _this.result.innerHTML = this.pricesValues[priceIndex] * Number(_this.counterInput.value) + ' $';
+
+        _this.result.innerHTML = `${currentPrice * value} $`;
     }
 
     this.init = () => {
         this.createPrices(this.pricesElements, this.prices);
-        this.createPrices(this.pricesValueElements, this.pricesValues)
-        this.priceTable()
+        this.createPrices(this.pricesValueElements, this.pricesValues);
+        _this.priceTable();
         // console.log(this.pricesValues);
         this.plus.addEventListener('click', this.increment);
         this.minus.addEventListener('click', this.decrement);
