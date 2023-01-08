@@ -112,6 +112,7 @@ $(document).ready(function () {
     if (window.innerWidth >= 1024) {
         let prevScrollValue = window.scrollY;
         window.addEventListener('scroll', animateHeader);
+
         function animateHeader() {
             if (prevScrollValue < window.scrollY) {
 
@@ -128,7 +129,6 @@ $(document).ready(function () {
             prevScrollValue = window.scrollY;
         }
     }
-
 
 
     const counterWrappers = [...document.querySelectorAll('.table-column')];
@@ -163,13 +163,13 @@ function Counter(counter) {
     this.prices = []
     this.pricesValueElements = [...counter.querySelectorAll('.price-value')];
     this.pricesValues = []
-    this.result = counter.querySelector('.numbers');
+    this.result = null;
     this.defaultLetter = counter.querySelector('.sum-counter-text');
     const _this = this;
 
     this.createPrices = (collection, arrayOfValues) => {
         collection.forEach((item) => {
-            const priceNumber = item.innerHTML.replace(/ /g,'');
+            const priceNumber = item.innerHTML.replace(/ /g, '');
             arrayOfValues.push(Number(priceNumber))
         })
     }
@@ -178,7 +178,8 @@ function Counter(counter) {
         e.preventDefault();
 
         this.counterInput.value = Number(this.counterInput.value) + 1;
-        _this.priceTable()
+        // this.counterInput.dispatchEvent(new Event('input'));
+        _this.setPrice()
     }
 
     this.decrement = (e) => {
@@ -188,13 +189,16 @@ function Counter(counter) {
             return
         }
         this.counterInput.value = Number(this.counterInput.value) - 1;
-        _this.priceTable()
+        // this.counterInput.dispatchEvent(new Event('input'));
+        _this.setPrice()
     }
 
     this.checkInputValue = (e) => {
         if (isNaN(this.counterInput.value)) {
             this.counterInput.value = 0;
         }
+
+        _this.setPrice()
     }
 
     this.getPriceIndex = (valueToCompare) => {
@@ -211,23 +215,42 @@ function Counter(counter) {
         })
     }
 
-    this.priceTable = () => {
+    this.setPrice = () => {
         const value = Number(_this.counterInput.value);
         const priceIndex = _this.getPriceIndex(value);
         const currentPrice = _this.pricesValues[priceIndex];
 
         if (!value) {
-            _this.result.innerHTML = _this.pricesValues[0] + _this.defaultLetter.innerHTML;
+            _this.result.innerHTML = new Intl.NumberFormat('ru-RU', {maximumSignificantDigits: 3}).format(_this.pricesValues[0]) + _this.defaultLetter.innerHTML;
             return
         }
 
-        _this.result.innerHTML = `${currentPrice * value} $`;
+        _this.result.innerHTML = new Intl.NumberFormat(
+            'ru-RU',
+            {
+                maximumSignificantDigits: 3,
+                style: 'currency',
+                currency: 'USD'
+            }
+        ).format(currentPrice * value);
+    }
+
+    this.setState = () => {
+        if (document.documentElement.clientWidth <= 1024) {
+            this.result = counter.querySelector('.numbers.mobile-money');
+            return;
+        }
+
+        this.result = counter.querySelector('.numbers.sum-counter');
     }
 
     this.init = () => {
+        this.setState();
+        // window.addEventListener('resize', this.setState);
+
         this.createPrices(this.pricesElements, this.prices);
         this.createPrices(this.pricesValueElements, this.pricesValues);
-        _this.priceTable();
+        _this.setPrice();
         // console.log(this.pricesValues);
         this.plus.addEventListener('click', this.increment);
         this.minus.addEventListener('click', this.decrement);
@@ -239,13 +262,13 @@ function Counter(counter) {
 function Modal() {
     this.modal = document.querySelector('.modal');
     const _this = this;
-    this.open = function(e){
+    this.open = function (e) {
         _this.modal.classList.add('open')
     }
-    this.close = function(e) {
+    this.close = function (e) {
         const isClose = _this.isEventClose(e);
 
-        if(isClose) {
+        if (isClose) {
             e.preventDefault();
             _this.modal.classList.remove('open');
         }
@@ -287,7 +310,6 @@ menu.addEventListener('click', (e) => {
 })
 
 
-
 function Form(form, modal) {
     const _this = this;
     this.loader = form.querySelector('.mask-form');
@@ -308,8 +330,6 @@ function Form(form, modal) {
     //         })
     //     }
     // }
-
-
 
 
     this.resultMessage = null;
@@ -430,7 +450,7 @@ function Form(form, modal) {
         }
         _this.loader.classList.add('active');
 
-        setTimeout(function() {
+        setTimeout(function () {
             _this.loader.classList.remove('active');
             modal.open()
 
@@ -479,8 +499,6 @@ function Form(form, modal) {
         }
     }
 }
-
-
 
 
 
